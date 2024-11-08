@@ -77,8 +77,11 @@ export default defineNuxtConfig({
     "@nuxt/icon", // SVG icon support.
     [
       "@pinia/nuxt",
-      { autoImports: ["defineStore"] }, // Pinia for state management.
+      {
+        autoImports: ["defineStore"],
+      },
     ],
+    "pinia-plugin-persistedstate/nuxt",
   ],
 
   /* 
