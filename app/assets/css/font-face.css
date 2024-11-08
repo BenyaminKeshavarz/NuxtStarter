@@ -1,0 +1,88 @@
+/* * -----------------------------------------------------
+   * Font Face Declarations for <YourFontName>
+
+    Load custom font weights for <YourFontName> 
+    to provide typographic variety in the application.
+    Replace <YourFontName> with your actual font name.
+    Ensure font files are correctly located and accessible 
+    in the specified path.
+    
+    Font Weight Descriptions:
+    - 100: Thin
+    - 300: Light
+    - 400: Normal (Regular)
+    - 600: SemiBold
+    - 700: Bold
+    - 800: ExtraBold
+    - 900: Black
+    - 950: ExtraBlack
+   * ------------------------------------------------------- */
+
+/* ---------------------------
+   Font <YourFontName>
+   ---------------------------*/
+
+/* 100 - Thin */
+@font-face {
+  font-family: "<YourFontName>";
+  font-weight: 100;
+  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Thin.ttf")
+    format("truetype");
+  font-display: block;
+}
+/* 300 - Light */
+@font-face {
+  font-family: "<YourFontName>";
+  font-weight: 300;
+  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Light.ttf")
+    format("truetype");
+  font-display: block;
+}
+/* 400 - Normal (Regular) */
+@font-face {
+  font-family: "<YourFontName>";
+  font-weight: 400;
+  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Regular.ttf")
+    format("truetype");
+  font-display: block;
+}
+/* 600 - SemiBold */
+@font-face {
+  font-family: "<YourFontName>";
+  font-weight: 600;
+  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-SemiBold.ttf")
+    format("truetype");
+  font-display: block;
+}
+/* 700 - Bold */
+@font-face {
+  font-family: "<YourFontName>";
+  font-weight: 700;
+  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Bold.ttf")
+    format("truetype");
+  font-display: block;
+}
+/* 800 - ExtraBold */
+@font-face {
+  font-family: "<YourFontName>";
+  font-weight: 800;
+  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-ExtraBold.ttf")
+    format("truetype");
+  font-display: block;
+}
+/* 900 - Black */
+@font-face {
+  font-family: "<YourFontName>";
+  font-weight: 900;
+  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Black.ttf")
+    format("truetype");
+  font-display: block;
+}
+/* 950 - ExtraBlack */
+@font-face {
+  font-family: "<YourFontName>";
+  font-weight: 950;
+  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-ExtraBlack.ttf")
+    format("truetype");
+  font-display: block;
+}

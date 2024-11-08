@@ -1,0 +1,36 @@
+{
+  "name": "nuxt-starter",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@nuxt/icon": "^1.6.1",
+    "@nuxt/image": "^1.8.1",
+    "@nuxtjs/seo": "^2.0.0-rc.23",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@pinia/nuxt": "^0.7.0",
+    "@vee-validate/nuxt": "^4.14.6",
+    "nuxt": "^3.14.159",
+    "nuxt-gtag": "^3.0.1",
+    "radix-vue": "^1.9.8",
+    "tailwindcss-rtl": "^0.9.0",
+    "typescript": "^4.9.5",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@nuxtjs/i18n": "^9.0.0-rc.2",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
+    "nuxt-lodash": "^2.5.3",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "sass": "^1.80.6"
+  }
+}

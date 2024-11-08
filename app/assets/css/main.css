@@ -1,0 +1,105 @@
+@import "./font-face.css";
+@import "./vue-transitions.css";
+@import "./tailwind.css";
+
+:root {
+  /* * -----------------------------------------------------
+   * ### Custom Brand Colors - (Main) Light Mode
+
+     These colors are used throughout the application for 
+     primary, secondary, accent, and neutral elements. 
+     All colors are defined using CSS variables, making it easy 
+     to manage and modify the color scheme. 
+     Colors are defined with optional opacity via Tailwind's 
+     utility classes (e.g., bg-brand-primary/50).
+
+     ! Install the Color Highlight extension to see highlighted colors
+   * ------------------------------------------------------- */
+
+  /* Primary Brand Color Main color for primary actions (e.g., buttons, links) */
+  --brand-primary: 34, 104, 203; /* Primary color - rgb(34, 104, 203) #2268CB */
+
+  /* Secondary Brand Colors Additional shades for backgrounds and highlights */
+  --brand-secondary: 40, 75, 120; /* Secondary DEFAULT rgb(40, 75, 120) #284B78 */
+  --brand-secondary-100: 220, 230, 245; /* Secondary shade - rgb(220, 230, 245) #DCE6F5 */
+  --brand-secondary-200: 180, 200, 230; /* Secondary shade - rgb(180, 200, 230) #B4C8E6 */
+  --brand-secondary-300: 140, 170, 210; /* Secondary shade - rgb(140, 170, 210) #8CAAD2 */
+  --brand-secondary-400: 100, 140, 190; /* Secondary shade - rgb(100, 140, 190) #648CBE */
+  --brand-secondary-500: 60, 110, 170; /* Secondary shade - rgb(60, 110, 170) #3C6EAA */
+  /* TODO: Add more shades as needed... */
+
+  /* Accent Color Used for highlights or UI emphasis */
+  --brand-accent: 240, 130, 40; /* Accent color - rgb(240, 130, 40) #F08228 */
+
+  /* Neutral Color Palette Grayscale shades for backgrounds, borders, and text */
+  --brand-neutral-100: 245, 245, 245; /* Neutral shade - rgb(245, 245, 245) #F5F5F5 */
+  --brand-neutral-200: 220, 220, 220; /* Neutral shade - rgb(220, 220, 220) #DCDCDC */
+  --brand-neutral-300: 180, 180, 180; /* Neutral shade - rgb(180, 180, 180) #B4B4B4 */
+  --brand-neutral-400: 140, 140, 140; /* Neutral shade - rgb(140, 140, 140) #8C8C8C */
+  --brand-neutral-500: 100, 100, 100; /* Neutral shade - rgb(100, 100, 100) #646464 */
+  /* TODO: Extend shades if needed... */
+
+  /* ------------------------------------------------------- 
+     Typography colors
+     ------------------------------------------------------- */
+  --default-text-color: var(--brand-neutral-500); /* Default text color */
+  --default-heading-color: var(--brand-secondary); /* Default heading color */
+
+  /* ------------------------------------------------------- 
+     Autofill colors
+     ------------------------------------------------------- */
+  --autofill-background-color: #f4f4f5;
+  --autofill-text-color: #262626;
+  --autofill-border-color: rgb(212 212 216 / 0.5);
+}
+
+.dark {
+  /* * -----------------------------------------------------
+   * ### Custom Brand Colors - Dark Mode
+
+     These colors are used throughout the application for 
+     primary, secondary, accent, and neutral elements. 
+     All colors are defined using CSS variables, making it easy 
+     to manage and modify the color scheme. 
+     Colors are defined with optional opacity via Tailwind's 
+     utility classes (e.g., bg-brand-primary/50).
+
+     ! Install the Color Highlight extension to see highlighted colors
+   * ------------------------------------------------------- */
+
+  /* Primary Brand Color */
+  --brand-primary: 28, 60, 120; /* Darker primary color - rgb(28, 60, 120) #1C3878 */
+
+  /* Secondary Brand Colors */
+  --brand-secondary: 40, 75, 120; /* Secondary DEFAULT rgb(40, 75, 120) #284B78 */
+  --brand-secondary-100: 40, 50, 80; /* Darker secondary color - rgb(40, 50, 80) #283250 */
+  --brand-secondary-200: 70, 90, 120; /* Darker secondary color - rgb(70, 90, 120) #465A78 */
+  --brand-secondary-300: 90, 110, 140; /* Darker secondary color - rgb(90, 110, 140) #5A6E8C */
+  --brand-secondary-400: 110, 130, 160; /* Darker secondary color - rgb(110, 130, 160) #6E82A0 */
+  --brand-secondary-500: 130, 150, 180; /* Darker secondary color - rgb(130, 150, 180) #8296B4 */
+  /* TODO: Add more shades as needed... */
+
+  /* Accent Color */
+  --brand-accent: 200, 120, 30; /* Darker accent for dark mode - rgb(200, 120, 30) #C8781E */
+
+  /* Neutral Color Palette */
+  --brand-neutral-100: 35, 35, 35; /* Darker neutral shade - rgb(35, 35, 35) #232323 */
+  --brand-neutral-200: 55, 55, 55; /* Darker neutral shade - rgb(55, 55, 55) #373737 */
+  --brand-neutral-300: 85, 85, 85; /* Darker neutral shade - rgb(85, 85, 85) #555555 */
+  --brand-neutral-400: 105, 105, 105; /* Darker neutral shade - rgb(105, 105, 105) #696969 */
+  --brand-neutral-500: 125, 125, 125; /* Darker neutral shade- rgb(125, 125, 125) #7D7D7D */
+  /* TODO: Extend shades if needed... */
+
+  /* ------------------------------------------------------- 
+     Typography colors
+     ------------------------------------------------------- */
+  --default-text-color: var(--brand-neutral-400); /* Default text color */
+  --default-heading-color: var(--brand-secondary); /* Default heading color */
+
+  /* ------------------------------------------------------- 
+     Autofill colors
+     ------------------------------------------------------- */
+  --autofill-background-color: #3f3f46;
+  --autofill-text-color: #e4e4e7;
+  --autofill-border-color: rgb(64 64 64 / 0.5);
+}

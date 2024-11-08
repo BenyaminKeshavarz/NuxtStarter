@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* * ---------------------------
+   * ### Typography
+   * ----------------------------- */
+
+  .heading-1 {
+    @apply text-5xl font-extrablack leading-normal;
+    color: var(--default-heading-color);
+  }
+  .heading-2 {
+    @apply text-4xl font-black;
+    color: var(--default-heading-color);
+  }
+  .heading-3 {
+    @apply text-3xl font-black;
+    color: var(--default-heading-color);
+  }
+  .heading-4 {
+    @apply text-2xl font-black;
+    color: var(--default-heading-color);
+  }
+  .heading-5 {
+    @apply text-xl font-black;
+    color: var(--default-heading-color);
+  }
+  .heading-6 {
+    @apply text-lg font-bold;
+    color: var(--default-heading-color);
+  }
+  .paragraph {
+    @apply text-lg font-normal leading-relaxed;
+    color: var(--default-text-color);
+  }
+
+  /* * ---------------------------
+   * ### Tools components
+   * ----------------------------- */
+
+  /* -------------------------------------------------------
+     Customize form inputs based on Tailwind form plugin
+     ------------------------------------------------------- */
+  .form-input,
+  .form-textarea {
+    @apply rounded-lg border border-brand-neutral-300 bg-brand-neutral-200 px-4 py-2 text-brand-neutral-500 placeholder-brand-neutral-400 transition-colors duration-300;
+
+    /* ! Focus Styles */
+    @apply focus:border-brand-primary focus:ring-1 focus:ring-brand-secondary;
+  }
+  /* Specific styles for .form-textarea */
+  .form-textarea {
+    @apply resize-y; /* Vertical resizing only */
+
+    /* ? Minimum height */
+    @apply min-h-24;
+  }
+
+  .form-checkbox {
+    @apply h-5 w-5 rounded-md border-brand-neutral-300 bg-brand-neutral-200 text-brand-accent shadow-none transition-colors duration-200 ease-in-out;
+
+    /* ! Focus Styles */
+    @apply focus:border-brand-primary focus:ring-1 focus:ring-brand-secondary;
+  }
+
+  .form-radio {
+    @apply h-5 w-5 rounded-full border-brand-neutral-300 bg-brand-neutral-200 text-brand-accent shadow-none transition-colors duration-200 ease-in-out;
+
+    /* ! Focus Styles */
+    @apply focus:border-brand-primary focus:ring-1 focus:ring-brand-secondary;
+  }
+
+  /* * ---------------------------
+   * ### Utility components
+   * ----------------------------- */
+
+  /* -------------------------------------------------------
+     Applies consistent horizontal padding on parent of the 
+     container element at different screen sizes. 
+     ------------------------------------------------------- */
+  .container-spacing {
+    @apply px-4 xs:px-6 sm:px-10;
+  }
+}
+
+@layer base {
+  /* * -----------------------------------------------------
+   * ### Base Styles - Global Styles, Typography, Backgrounds
+   * -------------------------------------------------------
+     This section defines essential base styles for your 
+     project, considering Tailwind's defaults.
+   * ------------------------------------------------------- */
+
+  html {
+    /* ! Set the primary font for the application. Replace <YourFontName> with the actual font name you want to use */
+    font-family: "<YourFontName>", sans-serif; /* Set a global font family */
+    background: var(
+      --brand-neutral-100
+    ); /* Background color set via CSS variables */
+    -webkit-font-smoothing: antialiased; /* Smooth fonts for better legibility */
+  }
+
+  body {
+    scroll-behavior: smooth; /* ? Enable smooth scrolling */
+    overflow-x: hidden; /* Disable horizontal scrollbar */
+  }
+
+  /* * -----------------------------------------------------
+   * ### Scrollbar Styling
+   * -------------------------------------------------------
+     Custom scrollbar for Webkit browsers (Chrome, Safari) and Firefox.
+   * ------------------------------------------------------- */
+
+  /* Webkit browsers */
+  ::-webkit-scrollbar {
+    width: 4px; /* Thin scrollbar width */
+    height: 4px; /* Thin scrollbar height */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Transparent track */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--brand-secondary); /* Custom scrollbar thumb color */
+    border-radius: 10px; /* Rounded thumb */
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin; /* Thin scrollbar in Firefox */
+    scrollbar-color: var(--brand-secondary) transparent; /* Custom scrollbar colors */
+  }
+
+  /* * -----------------------------------------------------
+   * ### Autofill Styling for Form Inputs
+   * -------------------------------------------------------
+     Customizes the autofill styles for form fields (input, textarea).
+   * ------------------------------------------------------- */
+
+  input:-webkit-autofill,
+  textarea:-webkit-autofill {
+    box-shadow: 0 0 0 30px var(--autofill-background-color) inset !important; /* Autofill background */
+    -webkit-text-fill-color: var(
+      --autofill-text-color
+    ) !important; /* Autofill text color */
+    border: 2px solid var(--autofill-border-color) !important; /* Autofill border color */
+  }
+
+  /* * -----------------------------------------------------
+   * ### Input Number Styling
+   * -------------------------------------------------------
+     Disables increment/decrement arrows on number inputs for consistency.
+   * ------------------------------------------------------- */
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Remove spin buttons */
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield; /* Remove spin buttons in Firefox */
+  }
+
+  /* * -----------------------------------------------------
+   * ### Disable Gray Highlight on Touch Devices
+   * -------------------------------------------------------
+     Prevents the default Gray highlight when tapping buttons/links on mobile.
+   * ------------------------------------------------------- */
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent; /* Remove highlight on touch */
+    -webkit-touch-callout: none; /* Disable touch callout in iOS */
+  }
+
+  /* * -----------------------------------------------------
+   * ### Prevent Text Selection on Interactive Elements
+   * -------------------------------------------------------
+     Disables text selection on buttons, links, images, and SVGs to improve UX.
+   * ------------------------------------------------------- */
+
+  img,
+  button,
+  a,
+  svg {
+    -webkit-user-select: none; /* Webkit browsers */
+    -khtml-user-select: none; /* Older browsers */
+    -moz-user-select: none; /* Firefox */
+    -o-user-select: none; /* Opera */
+    user-select: none; /* Disable text selection */
+  }
+
+  /* * -----------------------------------------------------
+   * ### Prevent Focus Outline for Non-Keyboard Users
+   * -------------------------------------------------------
+     Disables the outline for mouse users, but ensures accessibility for keyboard navigation.
+   * ------------------------------------------------------- */
+
+  *:focus-visible {
+    outline: none; /* Remove outline unless the user is navigating with keyboard */
+  }
+}
