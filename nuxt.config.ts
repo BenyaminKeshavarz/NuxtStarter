@@ -26,7 +26,20 @@ export default defineNuxtConfig({
      Enables development tools for debugging and disables auto-component discovery for control.
    * ------------------------------------------------------- */
   devtools: { enabled: true }, // ? Enable Nuxt DevTools for debugging.
-  components: false, // TODO: Set to `true` to enable automatic component discovery.
+
+  /*
+   * -------------------------------------------------------
+   * ### Config Auto Imports
+   * ------------------------------------------------------- */
+  components: [
+    {
+      path: "~/components/Icons", // Only auto-import components in this directory
+      global: true, // Make these components available globally
+    },
+  ],
+  imports: {
+    dirs: ["composables/**"], // This will import all composables from nested directories.
+  },
 
   /* 
    * -------------------------------------------------------
@@ -56,6 +69,23 @@ export default defineNuxtConfig({
         { hid: "description", name: "description", content: "" }, // TODO: Add description for SEO.
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }], // Favicon link.
+
+      /* ------------------------------------------------------------------
+         Immediately applies the saved 'dark' theme from localStorage
+         to the <html> element to prevent flickering and ensure the correct
+         theme on page load.
+         ------------------------------------------------------------------ */
+      script: [
+        {
+          children: `
+              (function () {
+                const savedTheme = localStorage.getItem('theme-color');
+                if (savedTheme === 'dark') document.documentElement.classList.add('dark');
+              })();
+            `,
+          type: "text/javascript",
+        },
+      ],
     },
   },
 
