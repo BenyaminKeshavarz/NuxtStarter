@@ -27,7 +27,7 @@ export default {
   // * Files Tailwind will scan for class usage
   content: [
     "./components/**/*.{js,vue,ts}", // Scan all JS, Vue, and TS files in components directory
-   './composables/**/*.{js,ts}', // Scan all JS, and TS files in composables directory
+    "./composables/**/*.{js,ts}", // Scan all JS, and TS files in composables directory
     "./layouts/**/*.vue", // Scan all Vue layout files
     "./pages/**/*.vue", // Scan all Vue pages
     "./plugins/**/*.{js,ts}", // Scan plugin files (JS & TS)
@@ -77,39 +77,54 @@ export default {
            Palette colors 
            -----------------------------*/
 
-        // Primary brand color (supports opacity levels via Tailwind utilities)
-        "brand-primary": withOpacity("--brand-primary"),
+        brand: {
+          // Primary brand color (supports opacity levels via Tailwind utilities)
+          primary: withOpacity("--brand-primary"),
 
-        // Secondary brand color shades
-        "brand-secondary": {
-          DEFAULT: withOpacity("--brand-secondary"),
-          100: withOpacity("--brand-secondary-100"),
-          200: withOpacity("--brand-secondary-200"),
-          300: withOpacity("--brand-secondary-300"),
-          400: withOpacity("--brand-secondary-400"),
-          500: withOpacity("--brand-secondary-500"),
-          // TODO: Add additional shades as needed...
-        },
+          // Secondary brand color shades
+          secondary: {
+            DEFAULT: withOpacity("--brand-secondary"),
+            100: withOpacity("--brand-secondary-100"),
+            200: withOpacity("--brand-secondary-200"),
+            300: withOpacity("--brand-secondary-300"),
+            400: withOpacity("--brand-secondary-400"),
+            500: withOpacity("--brand-secondary-500"),
+            // TODO: Add additional shades as needed...
+          },
 
-        // Accent color for UI highlights (supports opacity)
-        "brand-accent": withOpacity("--brand-accent"),
+          // Accent color for UI highlights (supports opacity)
+          accent: withOpacity("--brand-accent"),
 
-        // Neutral palette with multiple shades for background and text colors
-        "brand-neutral": {
-          100: withOpacity("--brand-neutral-100"),
-          200: withOpacity("--brand-neutral-200"),
-          300: withOpacity("--brand-neutral-300"),
-          400: withOpacity("--brand-neutral-400"),
-          500: withOpacity("--brand-neutral-500"),
-          // TODO: Add more shades if required for specific designs...
+          // Neutral palette with multiple shades for background and text colors
+          neutral: {
+            100: withOpacity("--brand-neutral-100"),
+            200: withOpacity("--brand-neutral-200"),
+            300: withOpacity("--brand-neutral-300"),
+            400: withOpacity("--brand-neutral-400"),
+            500: withOpacity("--brand-neutral-500"),
+            // TODO: Add more shades if required for specific designs...
+          },
         },
 
         /* -----------------------------
-           Typography colors 
+           Default colors 
            -----------------------------*/
 
-        "default-text": withOpacity("--default-text-color"), // For normal text color
-        "default-heading": withOpacity("--default-heading-color"), // For headings
+        default: {
+          // Typography colors
+          text: withOpacity("--default-text-color"), // For normal text color
+          heading: withOpacity("--default-heading-color"), // For headings
+        },
+
+        /* -----------------------------
+           Constant colors 
+           -----------------------------*/
+
+        const: {
+          pink: {
+            100: "#FCE7F1",
+          },
+        },
       },
 
       // * Custom box shadow presets for UI depth
