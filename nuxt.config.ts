@@ -1,42 +1,32 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
+  typescript: {
+    strict: true,
+    typeCheck: true,
+  },
+
+  css: ["~/assets/css/main.css"],
+
+  devtools: { enabled: true }, // ? Enable Nuxt DevTools for debugging.
+
+  vite: { plugins: [tailwindcss()] },
+
   /* 
    * -------------------------------------------------------
    * ### Nuxt 4 Compatibility & Global Settings
    * ------------------------------------------------------- 
      Configures compatibility with Nuxt 4 and sets up basic global settings.
    * ------------------------------------------------------- */
-  future: {
-    compatibilityVersion: 4, // Ensures compatibility with Nuxt 4.
-  },
-
-  /* 
-   * -------------------------------------------------------
-   * ### Global Styles - CSS
-   * -------------------------------------------------------
-     Link to the global CSS file for the app's base styles.
-   * ------------------------------------------------------- */
-  css: ["~/assets/css/main.css"], // Import your global CSS file.
-
-  /* 
-   * -------------------------------------------------------
-   * ### Development Tools & Component Discovery
-   * -------------------------------------------------------
-     Enables development tools for debugging and disables auto-component discovery for control.
-   * ------------------------------------------------------- */
-  devtools: { enabled: true }, // ? Enable Nuxt DevTools for debugging.
+  future: { compatibilityVersion: 4 },
+  compatibilityDate: "2025-06-20",
 
   /*
    * -------------------------------------------------------
    * ### Config Auto Imports
    * ------------------------------------------------------- */
-  components: [
-    {
-      path: "~/components/Icons", // Only auto-import components in this directory
-      global: true, // Make these components available globally
-    },
-  ],
+  components: false,
   imports: {
     dirs: ["composables/**"], // This will import all composables from nested directories.
   },
@@ -49,7 +39,8 @@ export default defineNuxtConfig({
    * ------------------------------------------------------- */
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL, // TODO: Add the API base URL in the environment variables.
+      apiBaseUrl: process.env.API_BASE_URL || "https://api.example.com",
+      // TODO: Add the API base URL in the environment variables.
     },
   },
 
@@ -61,66 +52,58 @@ export default defineNuxtConfig({
    * ------------------------------------------------------- */
   app: {
     head: {
-      title: "Nuxt 3 - Starter Template", // Default title for the app.
-      htmlAttrs: { lang: "en", dir: "ltr" }, // Set language and text direction.
+      title: "Nuxt 3 - Starter Template",
+      htmlAttrs: { lang: "en", dir: "ltr" },
       meta: [
-        { charset: "utf-8" }, // Standard UTF-8 encoding.
-        { name: "viewport", content: "width=device-width, initial-scale=1" }, // For responsiveness.
-        { hid: "description", name: "description", content: "" }, // TODO: Add description for SEO.
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "description", content: "" },
       ],
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }], // Favicon link.
-
-      /* ------------------------------------------------------------------
-         Immediately applies the saved 'dark' theme from localStorage
-         to the <html> element to prevent flickering and ensure the correct
-         theme on page load.
-         ------------------------------------------------------------------ */
-      script: [
-        {
-          children: `
-              (function () {
-                const savedTheme = localStorage.getItem('theme-color');
-                if (savedTheme === 'dark') document.documentElement.classList.add('dark');
-              })();
-            `,
-          type: "text/javascript",
-        },
-      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
 
-  /* 
+  /*
    * -------------------------------------------------------
    * ### Modules & Extensions
-   * -------------------------------------------------------
-     Configure third-party modules for functionality like SEO, Google Analytics, i18n, etc.
    * ------------------------------------------------------- */
   modules: [
-    "radix-vue/nuxt", // Radix UI for accessibility-first components.
-    "nuxt-gtag", // Google Analytics for tracking.
-    "@nuxtjs/tailwindcss", // TailwindCSS for utility-first styling.
-    "nuxt-lodash", // Lodash for utility functions.
-    "@nuxt/image", // Optimized image handling.
-    "@vee-validate/nuxt", // VeeValidate for form validation.
-    "@nuxtjs/seo", // SEO management.
-    "@nuxtjs/i18n", // Internationalization (i18n) for multilingual support.
-    "@nuxt/icon", // SVG icon support.
-    [
-      "@pinia/nuxt",
-      {
-        autoImports: ["defineStore"],
-      },
-    ],
-    "pinia-plugin-persistedstate/nuxt",
+    "@nuxt/ui",
+    "nuxt-lodash",
+    "@nuxt/image",
+    "@vee-validate/nuxt",
+    "@nuxtjs/seo",
+    "@nuxtjs/i18n",
+    "@pinia/nuxt",
+    "nuxt-swiper",
+    "@nuxt/eslint",
   ],
 
-  /* 
+  /*
    * -------------------------------------------------------
-   * ### Google Analytics & i18n Configuration
-   * -------------------------------------------------------
-     Set up Google Analytics tracking and i18n for multiple languages.
+   * ### NuxtUI Configuration
    * ------------------------------------------------------- */
-  gtag: { id: process.env.GTAG_ID }, // TODO: Add your Google Analytics ID.
+  ui: {
+    fonts: false, // TODO: Enable NuxtFont later.
+    theme: {
+      colors: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'accent',
+        'info',
+        'success',
+        'warning',
+        'error'
+      ]
+    }
+  },
+  icon: { customCollections: [{ prefix: "custom", dir: "~/assets/icons" }] },
+
+  /*
+   * -------------------------------------------------------
+   * ### i18n Configuration
+   * ------------------------------------------------------- */
   i18n: {
     langDir: "locales", // Locale files directory.
     lazy: true, // Enable lazy loading of locale files.
@@ -132,11 +115,14 @@ export default defineNuxtConfig({
     strategy: "prefix_except_default", // Use URL prefixes for non-default languages.
     detectBrowserLanguage: { useCookie: true, cookieKey: "i18n_redirected" },
     debug: false, // Disable debug in production.
+    bundle: {
+      optimizeTranslationDirective: false,
+    },
   },
 
   /* 
    * -------------------------------------------------------
-   * ### Route Rules & Compatibility Date
+   * ### Route Rules & Hybrid Rendering
    * -------------------------------------------------------
      Manage caching, SWR, and prerendering rules for pages.
    * ------------------------------------------------------- */
@@ -145,5 +131,4 @@ export default defineNuxtConfig({
     "/blogs": { swr: false },
     "/about": { prerender: false },
   },
-  compatibilityDate: "2024-04-03", // Set compatibility date for API responses.
 });

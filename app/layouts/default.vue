@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div id="teleport-layout" class="relative">
     <!-- Main Content Section -->
     <main>
       <!-- Dynamic Page Content -->
