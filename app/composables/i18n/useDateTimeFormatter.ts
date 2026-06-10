@@ -7,7 +7,8 @@ import {
   parseDate,
   fromDate,
 } from "@internationalized/date";
-import type { DateTimeType } from "~/types/utils/i18n";
+
+type DateTimeType = string | number | Date | undefined | null;
 
 /**
  * Composable for formatting dates and times with reactivity to i18n locale changes.
@@ -170,15 +171,11 @@ export function useDateTimeFormatter() {
     const msPerDay = 1000 * 60 * 60 * 24;
     const daysDiff = Math.floor((todayUTC - targetUTC) / msPerDay);
 
-    const relativeFormatter = new Intl.RelativeTimeFormat(locale.value, {
-      numeric: "auto",
-    });
-
-    if (daysDiff === 0) return relativeFormatter.format(0, "day");
-    if (daysDiff === 1) return relativeFormatter.format(-1, "day");
+    if (daysDiff === 0) return "امروز";
+    if (daysDiff === 1) return "دیروز";
 
     if (daysDiff > 1 && daysDiff < thresholdInDays) {
-      return relativeFormatter.format(-daysDiff, "day");
+      return `${daysDiff} روز پیش`;
     }
 
     return formatDate(date, absoluteFormatOptions);

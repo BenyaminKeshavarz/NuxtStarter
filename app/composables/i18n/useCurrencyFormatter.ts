@@ -1,4 +1,4 @@
-import type { AmountType, LocaleConfig } from "~/types/utils/i18n";
+type AmountType = number | string;
 
 /**
  * Composable for currency formatting across different locales
@@ -6,7 +6,7 @@ import type { AmountType, LocaleConfig } from "~/types/utils/i18n";
 export function useCurrencyFormatter() {
   const { localeProperties } = useI18n();
 
-  const locale = computed(() => localeProperties.value as LocaleConfig);
+  const locale = computed(() => localeProperties.value as any);
 
   /**
    * Validates if the provided amount is a valid number

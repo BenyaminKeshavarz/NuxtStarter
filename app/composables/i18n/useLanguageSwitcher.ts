@@ -1,7 +1,17 @@
-import type {
-  LocaleConfig,
-  SupportedLocaleCode,
-} from "~/types/utils/i18n";
+import type { LocaleObject } from "@nuxtjs/i18n";
+
+type SupportedLocaleCode = LocaleObject["code"];
+
+interface LocaleCurrency {
+  code: string;
+  symbol: string;
+  position: "before" | "after";
+}
+
+interface LocaleConfig extends LocaleObject {
+  currency: LocaleCurrency;
+  language: string;
+}
 
 /**
  * Composable for handling language switching functionality

@@ -1,5 +1,3 @@
-import type { LocaleConfig } from "~/types/utils/i18n";
-
 /**
  * Custom hook for number formatting across different locales
  * @returns Object containing number formatting functions
@@ -8,7 +6,7 @@ export function useNumberFormatter() {
   const { handleError } = useErrorHandler();
   const { localeProperties } = useI18n();
 
-  const locale = computed(() => localeProperties.value as LocaleConfig);
+  const locale = computed(() => localeProperties.value as any);
 
   /**
    * Formats a number according to the specified locale
