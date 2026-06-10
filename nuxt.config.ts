@@ -2,133 +2,143 @@
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
+  /* ### TypeScript Configuration */
   typescript: {
     strict: true,
     typeCheck: true,
   },
 
+  /* ### CSS Configuration */
   css: ["~/assets/css/main.css"],
 
-  devtools: { enabled: true }, // ? Enable Nuxt DevTools for debugging.
+  /* ### Devtools Configuration */
+  devtools: { enabled: true },
 
-  vite: { plugins: [tailwindcss()] },
-
-  /* 
-   * -------------------------------------------------------
-   * ### Nuxt 4 Compatibility & Global Settings
-   * ------------------------------------------------------- 
-     Configures compatibility with Nuxt 4 and sets up basic global settings.
-   * ------------------------------------------------------- */
-  future: { compatibilityVersion: 4 },
-  compatibilityDate: "2025-06-20",
-
-  /*
-   * -------------------------------------------------------
-   * ### Config Auto Imports
-   * ------------------------------------------------------- */
-  components: false,
-  imports: {
-    dirs: ["composables/**"], // This will import all composables from nested directories.
-  },
-
-  /* 
-   * -------------------------------------------------------
-   * ### Runtime Configuration - API URL
-   * -------------------------------------------------------
-     Store the API base URL securely in the runtime config.
-   * ------------------------------------------------------- */
-  runtimeConfig: {
-    public: {
-      apiBaseUrl: process.env.API_BASE_URL || "https://api.example.com",
-      // TODO: Add the API base URL in the environment variables.
+  /* ### Vite Configuration */
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      sourcemap: false, // Disable sourcemaps to avoid Tailwind CSS v4 warnings
     },
   },
 
-  /* 
-   * -------------------------------------------------------
-   * ### App SEO and Head Configuration
-   * -------------------------------------------------------
-     Set up metadata, title, and other head elements for SEO.
-   * ------------------------------------------------------- */
+  /* ### Auto Imports Configuration */
+  components: false,
+  imports: {
+    dirs: ["composables/**"],
+  },
+
+  /* ### Runtime Configuration */
+  runtimeConfig: {
+    serverApiBaseUrl: "",
+
+    public: {
+      clientApiBaseUrl: "",
+      assetsBaseUrl: "",
+      apiVersion: "",
+      dashboardUrl: "",
+    },
+  },
+
+  /* ### App SEO and Head Configuration */
   app: {
     head: {
-      title: "Nuxt 3 - Starter Template",
-      htmlAttrs: { lang: "en", dir: "ltr" },
+      title: "Nuxt Starter Template", // TODO: Change title.
+      htmlAttrs: { lang: "fa-IR", dir: "rtl" },
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "description", content: "" },
+        { name: "description", content: "" }, // TODO: Change description for SEO.
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
+    pageTransition: { name: "page", mode: "out-in" },
+    layoutTransition: { name: "layout", mode: "out-in" },
   },
 
-  /*
-   * -------------------------------------------------------
-   * ### Modules & Extensions
-   * ------------------------------------------------------- */
+  /* ### Modules & Extensions */
   modules: [
     "@nuxt/ui",
-    "nuxt-lodash",
     "@nuxt/image",
-    "@vee-validate/nuxt",
     "@nuxtjs/seo",
     "@nuxtjs/i18n",
     "@pinia/nuxt",
-    "nuxt-swiper",
     "@nuxt/eslint",
   ],
 
-  /*
-   * -------------------------------------------------------
-   * ### NuxtUI Configuration
-   * ------------------------------------------------------- */
+  /* ### UI Configuration */
   ui: {
     fonts: false, // TODO: Enable NuxtFont later.
     theme: {
       colors: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'accent',
-        'info',
-        'success',
-        'warning',
-        'error'
-      ]
-    }
-  },
-  icon: { customCollections: [{ prefix: "custom", dir: "~/assets/icons" }] },
-
-  /*
-   * -------------------------------------------------------
-   * ### i18n Configuration
-   * ------------------------------------------------------- */
-  i18n: {
-    langDir: "locales", // Locale files directory.
-    lazy: true, // Enable lazy loading of locale files.
-    defaultLocale: "en", // Default language (English).
-    locales: [
-      { code: "en", name: "English", language: "en-US", file: "en.json" },
-      { code: "fa", name: "Persian", language: "fa-IR", file: "fa.json" },
-    ],
-    strategy: "prefix_except_default", // Use URL prefixes for non-default languages.
-    detectBrowserLanguage: { useCookie: true, cookieKey: "i18n_redirected" },
-    debug: false, // Disable debug in production.
-    bundle: {
-      optimizeTranslationDirective: false,
+        "primary",
+        "secondary",
+        "accent",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "neutral",
+      ],
     },
   },
-
-  /* 
-   * -------------------------------------------------------
-   * ### Route Rules & Hybrid Rendering
-   * -------------------------------------------------------
-     Manage caching, SWR, and prerendering rules for pages.
-   * ------------------------------------------------------- */
-  routeRules: {
-    "/": { swr: false },
-    "/blogs": { swr: false },
-    "/about": { prerender: false },
+  colorMode: {
+    preference: "light",
   },
+  icon: {
+    customCollections: [{ prefix: "custom", dir: "./app/assets/icons" }],
+  },
+
+  /* ###  Google Analytics */
+  // gtag: { id: process.env.GTAG_ID },
+
+  /* ### i18n Configuration */
+  i18n: {
+    langDir: "locales",
+    defaultLocale: "fa",
+    defaultDirection: "rtl",
+    locales: [
+      {
+        code: "fa",
+        name: "Persian",
+        localName: "فارسی",
+        language: "fa-IR",
+        file: "fa.json",
+        dir: "rtl",
+        currency: {
+          code: "IRR",
+          symbol: "تومان",
+          position: "after",
+        },
+      },
+      {
+        code: "en",
+        name: "English",
+        localName: "English",
+        language: "en-US",
+        file: "en.json",
+        dir: "ltr",
+        currency: {
+          code: "USD",
+          symbol: "$",
+          position: "before",
+        },
+      },
+    ],
+    strategy: "prefix_except_default",
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+      alwaysRedirect: false,
+      fallbackLocale: "fa",
+    },
+    debug: false,
+  },
+
+  /* ### Route Rules Configuration */
+  routeRules: {},
+
+  /* ### Compatibility Date */
+  compatibilityDate: "2025-03-18",
 });

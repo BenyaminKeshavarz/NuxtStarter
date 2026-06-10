@@ -24,4 +24,3 @@ logs
 !.env.example
 
 .cursor
-infrastructure-report.md

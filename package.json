@@ -1,7 +1,11 @@
 {
   "name": "nuxt-starter",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -15,15 +19,16 @@
     "@nuxtjs/seo": "^5.1.4",
     "@pinia/nuxt": "^0.11.3",
     "@tailwindcss/vite": "^4.3.0",
-    "@vee-validate/nuxt": "^4.15.1",
-    "@vee-validate/zod": "^4.15.1",
+    "@types/lodash-es": "^4.17.12",
     "@vueuse/core": "^14.3.0",
+    "embla-carousel-vue": "^8.6.0",
+    "maska": "^3.2.0",
     "nuxt": "^4.4.7",
-    "nuxt-swiper": "^2.0.2",
     "pinia": "^3.0.4",
     "tailwindcss": "^4.3.0",
     "vue": "^3.5.35",
-    "vue-router": "^5.1.0"
+    "vue-router": "^5.1.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.15.2",
@@ -33,7 +38,6 @@
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^25.9.2",
     "eslint": "^10.4.1",
-    "nuxt-lodash": "^2.5.3",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "typescript": "^6.0.3",
