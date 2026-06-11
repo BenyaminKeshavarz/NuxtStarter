@@ -1,13 +1,38 @@
+<script setup lang="ts">
+// #region --------- Imports ---------
+import AppLoadingOverlay from "~/components/layout/AppLoadingOverlay.vue";
+import AppNavigateLoading from "~/components/layout/AppNavigateLoading.vue";
+// #endregion
 
+// #region --------- Utilities & Services ---------
+const { locale, locales } = useI18n();
+// #endregion
+
+// #region --------- Computed ---------
+const currentLocale = computed(() => {
+  return locales.value.find((l) => l.code === locale.value) || locales.value[0];
+});
+// #endregion
+
+useHead({
+  htmlAttrs: {
+    lang: () => currentLocale.value?.language,
+    dir: () => currentLocale.value?.dir ?? "rtl",
+    class: () => (currentLocale.value?.dir === "ltr" ? "font-en" : "font-fa"),
+  },
+});
+</script>
 
 <template>
   <!-- Main App Wrapper -->
   <UApp>
-    <NuxtLoadingIndicator />
-    <NuxtRouteAnnouncer/>
+    <NuxtLoadingIndicator :height="5" :throttle="200" />
+    <AppNavigateLoading />
 
-    <!-- TODO: Remove it later -->
-    <!-- <NuxtWelcome /> -->
+    <NuxtRouteAnnouncer />
+
+    <!-- Global Overlays -->
+    <AppLoadingOverlay />
 
     <!-- Layout that will render header, footer, page content and etc. -->
     <NuxtLayout>
