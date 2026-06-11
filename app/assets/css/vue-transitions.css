@@ -1,9 +1,9 @@
 /* * ---------------------------
-* ### Global Transitions
-* ----------------------------- */
+ * ### Global Transitions
+ * ----------------------------- */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 500ms ease;
+  transition: opacity 300ms ease;
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -11,11 +11,11 @@
 }
 
 /* * ---------------------------
-* ### Page Transition
-* ----------------------------- */
+  * ### Page Transition
+  * ----------------------------- */
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 500ms ease;
+  transition: opacity 300ms ease;
 }
 .page-enter-from,
 .page-leave-to {
@@ -23,14 +23,14 @@
 }
 
 /* * ---------------------------
-* ### Layout Transition
-* ----------------------------- */
-.layouts-enter-active,
-.layouts-leave-active {
-  transition: opacity 500ms ease;
+  * ### Layout Transition
+  * ----------------------------- */
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 300ms ease;
 }
 
-.layouts-enter-from,
-.layouts-leave-to {
+.layout-enter-from,
+.layout-leave-to {
   opacity: 0;
 }

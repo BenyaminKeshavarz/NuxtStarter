@@ -3,195 +3,173 @@
 @import "./font-face.css";
 @import "./vue-transitions.css";
 
-/* Tailwind Plugin */
-@plugin "@tailwindcss/typography";
-@plugin "@tailwindcss/aspect-ratio";
-@plugin "@tailwindcss/forms" {
-  strategy: "class"; /* Only apply form styles when using .form-* classes */
-}
-
 /* Custom Variants */
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant hover (&:hover);
 
 @theme {
-  /* *Custom font weights for typography styling */
-  --font-weight-extrablack: 950;
-
-  /* * Custom breakpoints for responsive design */
-  --breakpoint-2xs: 375px; /* Very small devices (small phones) */
-  --breakpoint-xs: 480px; /* Extra small devices (phones) */
-  --breakpoint-sm: 640px; /* Small devices (standard phones) */
-  --breakpoint-md: 768px; /* Medium devices (tablets) */
-  --breakpoint-lg: 1024px; /* Large devices (small laptops/desktops) */
-  --breakpoint-xl: 1280px; /* Extra-large devices (large laptops/desktops) */
-  --breakpoint-2xl: 1440px; /* 2x-large devices (large desktops) */
-  --breakpoint-3xl: 1920px; /* 3x-large devices (Full HD screens) */
-
-  /* * Custom box shadow presets for UI depth */
-  --shadow-surround: 0px 0px 60px 0px rgba(0, 0, 0, 0.1);
-}
-
-@utility flex-center {
-  @apply flex items-center justify-center;
+  /* -------------------- breakpoint -------------------- */
+  --breakpoint-2xs: 375px;
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1920px;
 }
 
 @theme static {
-  /* * Custom colors */
-  --color-brand-primary-300: #d0a8ff;
-  --color-brand-primary-400: #c084fc;
-  --color-brand-primary-500: #7922d8;
-  --color-brand-primary-600: #7b11f9;
-  --color-brand-primary-700: #5d04c6;
-  --color-brand-primary-800: #3636b2;
+  /* -------------------- font weight -------------------- */
+  --font-weight-extrablack: 950;
 
-  --color-brand-secondary-600: #595e6b;
-  --color-brand-secondary-700: #313c59;
-  --color-brand-secondary-800: #161c2d;
+  /* -------------------- font families -------------------- */
+  /* Loaded via Nuxt UI fonts module (ui.fonts: true in nuxt.config) */
+  --font-sans: "Public Sans", sans-serif;
+  --font-vazir: Vazir, sans-serif;
 
-  --color-brand-accent: #f74d4d;
-
-  --color-theme-light: #ffffff;
-  --color-theme-dark: #000000;
+  /* -------------------- colors -------------------- */
+  /* TODO: Replace with your brand palette */
+  --color-green-50: #effdf5;
+  --color-green-100: #d9fbe8;
+  --color-green-200: #b3f5d1;
+  --color-green-300: #75edae;
+  --color-green-400: #00dc82;
+  --color-green-500: #00c16a;
+  --color-green-600: #00a155;
+  --color-green-700: #007f45;
+  --color-green-800: #016538;
+  --color-green-900: #0a5331;
+  --color-green-950: #052e16;
 }
 
-html.dark {
-  --color-theme-light: #000000;
-  --color-theme-dark: #ffffff;
+:root {
+  --autofill-background-color: #f4f4f5;
+  --autofill-text-color: #262626;
+  --autofill-border-color: #d4d4d880;
 }
 
-@layer components {
-  /* * ---------------------------
-   * ### Typography
-   * ----------------------------- */
+/* -------------------- Utilities -------------------- */
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
 
-  .heading-* {
-    color: var(--color-brand-secondary-800);
-    &::first-letter {
-      text-transform: uppercase;
-    }
-  }
-  .heading-1 {
-    @apply text-4xl font-semibold sm:text-5xl lg:text-6xl;
-  }
-  .heading-2 {
-    @apply text-3xl font-semibold sm:text-4xl lg:text-5xl;
-  }
-  .heading-3 {
-    @apply text-2xl font-semibold md:text-3xl;
-  }
-  .heading-4 {
-    @apply xs:text-2xl text-xl font-medium;
-  }
-  .heading-5 {
-    @apply text-sm font-medium sm:text-base;
-  }
-  .heading-6 {
-    @apply text-xs font-medium sm:text-sm;
+  max-width: none;
+
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+    max-width: 640px;
   }
 
-  .paragraph-* {
-    color: var(--color-brand-secondary-600);
-  }
-  .paragraph-1 {
-    @apply xs:text-base text-sm font-normal leading-relaxed lg:text-lg;
-  }
-  .paragraph-2 {
-    @apply text-xs font-normal leading-relaxed;
+  @media (min-width: 768px) {
+    max-width: 768px;
   }
 
-  /* * ---------------------------
-   * ### Tools components
-   * ----------------------------- */
-
-  /* -------------------------------------------------------
-     Customize form inputs based on Tailwind form plugin
-     ------------------------------------------------------- */
-  .form-input,
-  .form-textarea {
-    @apply text-brand-primary placeholder-brand-primary/50 bg-theme-light w-full rounded-lg border-2 border-transparent px-4 py-3 text-sm ring-0 transition-colors duration-300;
-
-    /* ! Focus Styles */
-    @apply focus:border-brand-accent/40 focus:ring-transparent;
-  }
-  /* Specific styles for .form-textarea */
-  .form-textarea {
-    @apply min-h-24 resize-y;
+  @media (min-width: 1024px) {
+    max-width: 1024px;
   }
 
-  .form-checkbox {
-    @apply border-brand-neutral-100/60 bg-theme-light text-brand-primary-400 size-4 rounded border-2 shadow-none transition-colors duration-200 ease-in-out;
-
-    /* ! Focus Styles */
-    @apply focus:ring-0 focus:ring-transparent;
+  @media (min-width: 1280px) {
+    max-width: 1280px;
   }
 
-  .form-radio {
-    @apply border-brand-neutral-100/60 bg-theme-light text-brand-primary-400 size-4 rounded-full border-2 shadow-none transition-colors duration-200 ease-in-out;
+  @media (min-width: 1440px) {
+    max-width: 1440px;
+  }
 
-    /* ! Focus Styles */
-    @apply focus:ring-0 focus:ring-transparent;
+  @media (min-width: 1920px) {
+    max-width: 1600px;
+  }
+
+  @media (min-width: 2560px) {
+    max-width: 1920px;
   }
 }
 
+@utility dir-rtl {
+  direction: rtl;
+}
+
+@utility dir-ltr {
+  direction: ltr;
+}
+
+@utility shadow-surround {
+  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
+}
+
+/*  carousel global styles  */
+@utility carousel-pagination-bullet {
+  @apply inline-block size-2 cursor-pointer rounded-full bg-neutral-300 transition-all duration-300 hover:bg-neutral-400;
+}
+@utility carousel-pagination-bullet-active {
+  @apply bg-primary hover:bg-primary w-6;
+}
+
+/* -------------------- base layer -------------------- */
 @layer base {
-  /* * -----------------------------------------------------
-   * ### Base Styles - Global Styles, Typography, Backgrounds
-   * -------------------------------------------------------
-     This section defines essential base styles for your 
-     project, considering Tailwind's defaults.
-   * ------------------------------------------------------- */
-
   html {
-    -webkit-font-smoothing: antialiased; /* Smooth fonts for better legibility */
+    -webkit-font-smoothing: antialiased;
   }
+
   html.font-fa {
-    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-vazir);
   }
 
   html.font-en {
-    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-sans);
   }
 
   body {
-    scroll-behavior: smooth; /* ? Enable smooth scrolling */
-    overflow-x: hidden; /* Disable horizontal scrollbar */
-    background: rgb(var(--theme-light));
+    overflow-x: hidden;
   }
 
-  /* * -----------------------------------------------------
-   * ### Scrollbar Styling
-   * -------------------------------------------------------
-     Custom scrollbar for Webkit browsers (Chrome, Safari) and Firefox.
-   * ------------------------------------------------------- */
-
-  /* Webkit browsers */
   ::-webkit-scrollbar {
-    width: 4px; /* Thin scrollbar width */
-    height: 4px; /* Thin scrollbar height */
+    width: 4px;
+    height: 4px;
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent; /* Transparent track */
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: var(
-      --color-brand-secondary-500
-    ); /* Custom scrollbar thumb color */
-    border-radius: 10px; /* Rounded thumb */
+    background-color: var(--color-primary);
+    border-radius: 10px;
   }
 
   /* Firefox */
   * {
-    scrollbar-width: thin; /* Thin scrollbar in Firefox */
-    scrollbar-color: var(--color-brand-secondary-500) transparent; /* Custom scrollbar colors */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) transparent;
   }
 
-  /* * -----------------------------------------------------
-   * ### Input Number Styling
-   * -------------------------------------------------------
-     Disables increment/decrement arrows on number inputs for consistency.
-   * ------------------------------------------------------- */
+  /* Smooth Scroll */
+  * {
+    scroll-behavior: smooth;
+    scroll-margin-top: 5rem;
+  }
+
+  @media (min-width: 640px) {
+    * {
+      scroll-margin-top: 7rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    * {
+      scroll-margin-top: 9rem;
+    }
+  }
+
+  input:-webkit-autofill,
+  textarea:-webkit-autofill {
+    box-shadow: 0 0 0 30px var(--autofill-background-color) inset !important; /* Autofill background */
+    -webkit-text-fill-color: var(
+      --autofill-text-color
+    ) !important; /* Autofill text color */
+    border: 2px solid var(--autofill-border-color) !important; /* Autofill border color */
+  }
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -200,15 +178,8 @@ html.dark {
   }
 
   input[type="number"] {
-    appearance: textfield;
-    -moz-appearance: textfield; /* Remove spin buttons in Firefox */
+    appearance: textfield; /* Remove spin buttons in Firefox */
   }
-
-  /* * -----------------------------------------------------
-    * ### Disable Gray Highlight on Touch Devices
-    * -------------------------------------------------------
-      Prevents the default Gray highlight when tapping buttons/links on mobile.
-    * ------------------------------------------------------- */
 
   a,
   button {
@@ -216,41 +187,27 @@ html.dark {
     -webkit-touch-callout: none; /* Disable touch callout in iOS */
   }
 
-  /* * -----------------------------------------------------
-    * ### Prevent Text Selection on Interactive Elements
-    * -------------------------------------------------------
-      Disables text selection on buttons, links, images, and SVGs to improve UX.
-    * ------------------------------------------------------- */
-
   img,
   button,
   a,
   svg {
-    -webkit-user-select: none; /* Webkit browsers */
-    -khtml-user-select: none; /* Older browsers */
-    -moz-user-select: none; /* Firefox */
-    -o-user-select: none; /* Opera */
-    user-select: none; /* Disable text selection */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
   }
-
-  /* * -----------------------------------------------------
-    * ### Prevent Focus Outline for Non-Keyboard Users
-    * -------------------------------------------------------
-      Disables the outline for mouse users, but ensures accessibility for keyboard navigation.
-    * ------------------------------------------------------- */
 
   *:focus-visible {
     outline: none; /* Remove outline unless the user is navigating with keyboard */
   }
 
-  /* * -----------------------------------------------------
-    * ### Text Alignment for Email and Phone Inputs
-    * -------------------------------------------------------
-      Ensures proper text alignment for email and phone inputs.
-    * ------------------------------------------------------- */
-
   input[type="email"],
   input[type="tel"] {
     @apply text-left rtl:placeholder:text-right;
+  }
+
+  ::-ms-reveal {
+    display: none;
   }
 }

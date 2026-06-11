@@ -3,7 +3,6 @@
 
     Load custom font weights for <YourFontName> 
     to provide typographic variety in the application.
-    Replace <YourFontName> with your actual font name.
     Ensure font files are correctly located and accessible 
     in the specified path.
     
@@ -19,73 +18,47 @@
     - 900: Black
     - 950: ExtraBlack
    * ------------------------------------------------------- */
-/* TODO: After config your fonts, enable NuxtFont from nuxt.config.ts */
 
 /* ---------------------------
-   Font <YourFontName>
+   Font Vazir
    ---------------------------*/
 
 /* 100 - Thin */
 @font-face {
-  font-family: "<YourFontName>";
+  font-family: "Vazir";
   font-weight: 100;
-  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Thin.ttf")
-    format("truetype");
+  src: url("~/assets/fonts/Vazir/Vazir-Thin.ttf") format("truetype");
   font-display: block;
 }
+
 /* 300 - Light */
 @font-face {
-  font-family: "<YourFontName>";
+  font-family: "Vazir";
   font-weight: 300;
-  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Light.ttf")
-    format("truetype");
+  src: url("~/assets/fonts/Vazir/Vazir-Light.ttf") format("truetype");
   font-display: block;
 }
-/* 400 - Normal (Regular) */
+
+/* 400 - Regular */
 @font-face {
-  font-family: "<YourFontName>";
+  font-family: "Vazir";
   font-weight: 400;
-  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Regular.ttf")
-    format("truetype");
+  src: url("~/assets/fonts/Vazir/Vazir.ttf") format("truetype");
   font-display: block;
 }
-/* 600 - SemiBold */
+
+/* 500 - Medium */
 @font-face {
-  font-family: "<YourFontName>";
-  font-weight: 600;
-  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-SemiBold.ttf")
-    format("truetype");
+  font-family: "Vazir";
+  font-weight: 500;
+  src: url("~/assets/fonts/Vazir/Vazir-Medium.ttf") format("truetype");
   font-display: block;
 }
+
 /* 700 - Bold */
 @font-face {
-  font-family: "<YourFontName>";
+  font-family: "Vazir";
   font-weight: 700;
-  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Bold.ttf")
-    format("truetype");
-  font-display: block;
-}
-/* 800 - ExtraBold */
-@font-face {
-  font-family: "<YourFontName>";
-  font-weight: 800;
-  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-ExtraBold.ttf")
-    format("truetype");
-  font-display: block;
-}
-/* 900 - Black */
-@font-face {
-  font-family: "<YourFontName>";
-  font-weight: 900;
-  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-Black.ttf")
-    format("truetype");
-  font-display: block;
-}
-/* 950 - ExtraBlack */
-@font-face {
-  font-family: "<YourFontName>";
-  font-weight: 950;
-  src: url("~/assets/fonts/<YourFontName>/<YourFontFile>-ExtraBlack.ttf")
-    format("truetype");
+  src: url("~/assets/fonts/Vazir/Vazir-Bold.ttf") format("truetype");
   font-display: block;
 }
