@@ -31,6 +31,10 @@
   --shadow-surround: 0px 0px 60px 0px rgba(0, 0, 0, 0.1);
 }
 
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
 @theme static {
   /* * Custom colors */
   --color-brand-primary-300: #d0a8ff;
@@ -140,11 +144,12 @@ html.dark {
   html {
     -webkit-font-smoothing: antialiased; /* Smooth fonts for better legibility */
   }
-  html[dir="ltr"] {
-    font-family: "Poppins", sans-serif; /* Set a global font family */
+  html.font-fa {
+    font-family: ui-sans-serif, system-ui, sans-serif;
   }
-  html[dir="rtl"] {
-    font-family: "IRANSansXFaNum", sans-serif; /* Set a global font family */
+
+  html.font-en {
+    font-family: ui-sans-serif, system-ui, sans-serif;
   }
 
   body {
