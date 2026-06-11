@@ -68,22 +68,10 @@ export default defineNuxtConfig({
 
   /* ### UI Configuration */
   ui: {
-    fonts: false, // TODO: Enable NuxtFont later.
-    theme: {
-      colors: [
-        "primary",
-        "secondary",
-        "accent",
-        "info",
-        "success",
-        "warning",
-        "error",
-        "neutral",
-      ],
-    },
+    fonts: true, 
   },
   colorMode: {
-    preference: "light",
+    preference: "dark",
   },
   icon: {
     customCollections: [{ prefix: "custom", dir: "./app/assets/icons" }],
@@ -137,7 +125,14 @@ export default defineNuxtConfig({
   },
 
   /* ### Route Rules Configuration */
-  routeRules: {},
+  routeRules: {
+    "/": { prerender: true },
+  },
+
+  /* ### OG Image (@nuxtjs/seo) — static prerender only; no runtime /_og endpoint */
+  ogImage: {
+    zeroRuntime: true,
+  },
 
   /* ### Compatibility Date */
   compatibilityDate: "2025-03-18",
