@@ -20,6 +20,9 @@ export default defineNuxtConfig({
     build: {
       sourcemap: false, // Disable sourcemaps to avoid Tailwind CSS v4 warnings
     },
+    optimizeDeps: {
+      include: ["@unhead/schema-org/vue", "maska/vue"],
+    },
   },
 
   /* ### Auto Imports Configuration */
