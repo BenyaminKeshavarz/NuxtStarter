@@ -1,54 +1,75 @@
-# NuxtStarter (Super)
+# NuxtStarter v2.0.0
 
-`NuxtStarter` is a flexible and modern **Nuxt 3-based** starter template, designed with **Nuxt 4** compatibility in mind. It is optimized for building fast, SEO-friendly web applications. With full-configured Tailwind CSS, internationalization (i18n), API endpoint management, and more, this template provides a solid foundation for developing your Nuxt-based web app.
+`NuxtStarter` is a modern **Nuxt 4** starter template for building fast, SEO-friendly, and type-safe web applications. It ships with Tailwind CSS v4, Nuxt UI, internationalization (Persian & English), centralized API setup, and a documented project structure you can extend quickly.
+
+## Tech Stack
+
+| Category | Version |
+| --- | --- |
+| Nuxt | ^4.4 |
+| Vue | ^3.5 |
+| TypeScript | ^6.0 (strict + type check) |
+| Tailwind CSS | ^4.3 |
+| Nuxt UI | ^4.8 |
+| Pinia | ^3.0 |
+| Node.js | >= 20 |
+| pnpm | >= 9 |
 
 ## Features
 
-- **Nuxt 3 & Nuxt 4 Compatibility**: Built with Nuxt 3, but fully compatible with Nuxt 4, ensuring smooth upgrades and long-term maintainability.
+- **Nuxt 4**: Built on Nuxt 4 with strict TypeScript, ESLint, and runtime type checking enabled.
+- **Nuxt UI + Tailwind CSS v4**: Accessible UI components, dark mode (default), fonts, and icons via Nuxt UI; Tailwind v4 integrated through the Vite plugin.
+- **Internationalization (i18n)**: Persian (default, RTL) and English locales with locale-aware date, number, and currency formatters.
+- **SEO**: Meta tags, schema, sitemap, and static OG image generation via `@nuxtjs/seo`.
+- **State Management**: Pinia with a starter store setup.
+- **Form Validation**: Reusable Zod schemas for common fields (phone, email, national code, and more).
+- **API Layer**: Centralized API configuration, error handling, and example composables for client/server requests.
+- **Utilities & Composables**: Carousel (Embla), sticky positioning, scroll helpers, local storage, overlay state, and more.
+- **Input Masking**: `maska` directive for formatted inputs.
+- **Documentation**: Detailed guides in the [`docs/`](./docs/) folder for composables, plugins, directives, and utilities.
 
-- **Tailwind CSS**: Utility-first CSS framework integrated for rapid styling and responsive design.
+## Modules & Libraries
 
-- **Internationalization (i18n)**: Multi-language support with built-in English and Persian locales.
+This template includes the following Nuxt modules and key dependencies:
 
-- **SEO Optimized**: Automatic meta tags, title configuration, and Google Analytics integration.
+- **[Nuxt UI](https://ui.nuxt.com/)**: Component library built on Reka UI with Tailwind CSS, icons, color mode, and fonts.
+- **[Nuxt Image](https://nuxt.com/modules/image)**: Automatic image optimization and responsive delivery.
+- **[Nuxt SEO](https://nuxtseo.com/)** (`@nuxtjs/seo`): SEO toolkit including sitemap, schema.org, and OG images.
+- **[Nuxt i18n](https://i18n.nuxtjs.org/)**: Multi-language routing and locale management.
+- **[Pinia for Nuxt](https://pinia.vuejs.org/)**: State management for Vue 3.
+- **[Nuxt ESLint](https://eslint.nuxt.com/)**: Linting integrated into the Nuxt toolchain.
+- **[VueUse](https://vueuse.org/)**: Collection of essential Vue composables.
+- **[Zod](https://zod.dev/)**: Schema validation for forms and API payloads.
+- **[Embla Carousel](https://www.embla-carousel.com/)**: Lightweight carousel for Vue.
+- **[Reka UI](https://reka-ui.com/)**: Headless accessible primitives (used directly where needed).
+- **[Maska](https://beholdr.github.io/maska/)**: Input masking for formatted fields.
 
-- **State Management**: Pinia for modern state management.
+See the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) for more about the framework.
 
-- **Component Library**: Radix UI for accessible components.
+## Project Structure
 
-- **Form Validation**: VeeValidate for form handling and validation.
-
-- **API Configurations**: Centralized API endpoint management for your project.
-
-- **Full Documentation:** Every file and section in the template is thoroughly documented to ensure clarity. Developers can easily follow and understand the setup, making the template easier to work with and extend.
-
-
-## Modules
-
-This template includes the following Nuxt modules and extensions to enhance the functionality and experience of your application:
-
-- **[Radix UI for Nuxt](https://radix-ui.com/docs/primitives)**: Provides accessibility-first components, ensuring your app is inclusive and usable for everyone.
-- **[Nuxt Google Analytics (nuxt-gtag)](https://nuxt.com/modules/gtag)**: Easily integrates Google Analytics for tracking user interactions and improving app insights.
-- **[Nuxt Tailwind CSS](https://nuxt.com/modules/tailwindcss)**: A utility-first CSS framework to help style your app with minimal effort, ensuring flexibility and scalability.
-- **[Nuxt Lodash](https://nuxt.com/modules/lodash)**: A utility library that simplifies working with arrays, numbers, objects, strings, etc.
-- **[Nuxt Image](https://nuxt.com/modules/image)**: Provides automatic image optimization, allowing your app to serve images in the best format and size for performance.
-- **[VeeValidate for Nuxt](https://vee-validate.logaretm.com/v4/getting-started/)**: Provides form validation for Nuxt, simplifying form handling and ensuring validation rules are followed.
-- **[Nuxt SEO](https://nuxtjs.org/docs/seo/)**: A set of tools to optimize your app for search engines, ensuring better visibility and ranking.
-- **[Nuxt i18n](https://i18n.nuxtjs.org/)**: Internationalization support, enabling your app to serve multiple languages and support global users.
-- **[Nuxt Icon](https://nuxt.com/modules/icon)**: Simplifies adding and using SVG icons within your Nuxt app.
-- **[Pinia for Nuxt](https://pinia.vuejs.org/)**: A state management library for Vue 3, designed for simplicity and better performance.
-
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more about Nuxt 3.
+```
+app/
+├── assets/          # CSS, fonts, icons, images
+├── components/      # Vue components (explicit imports)
+├── composables/     # API, i18n, and utility composables
+├── directives/      # Custom Vue directives
+├── layouts/         # App layouts
+├── pages/           # File-based routes
+├── plugins/         # Nuxt plugins (API client, directives)
+├── stores/          # Pinia stores
+├── types/           # TypeScript type definitions
+└── utils/           # Helpers and Zod schemas
+docs/                # In-repo documentation
+i18n/locales/        # Translation files (fa, en)
+```
 
 ## Getting Started
 
-To get started with the NuxtStarter template, follow these steps:
-
 ### Prerequisites
 
-- **[NPM](https://www.npmjs.com/)** - Node.js package manager, which is required to manage project dependencies. 
-
-- **[Node.js 20+](https://nodejs.org)** - Make sure you have Node.js version 20 or higher installed. You can check your Node.js version by running `node -v` in your terminal.
+- **[Node.js 20+](https://nodejs.org)** — Check your version with `node -v`.
+- **[pnpm 9+](https://pnpm.io/)** — This project uses pnpm as its package manager. Check with `pnpm -v`.
 
 ### Installation
 
@@ -56,55 +77,79 @@ To get started with the NuxtStarter template, follow these steps:
 
 ```bash
 git clone https://github.com/BenyaminKeshavarz/NuxtStarter.git
+cd NuxtStarter
 ```
 
 2. Install dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 3. Prepare the environment
 
-Copy the `.env.example` file to `.env` and fill in the necessary information
+Copy `.env.example` to `.env` and fill in the required values:
 
 ```bash
 cp .env.example .env
 ```
+
+Key environment variables:
+
+| Variable | Description |
+| --- | --- |
+| `PORT` | Dev server port (default: `3050`) |
+| `NUXT_SERVER_API_BASE_URL` | Server-side API base URL (SSR) |
+| `NUXT_PUBLIC_CLIENT_API_BASE_URL` | Client-side API base URL |
+| `NUXT_PUBLIC_ASSETS_BASE_URL` | CDN/storage base for media paths |
+| `NUXT_PUBLIC_API_VERSION` | Sent as `X-Version` header on API requests |
+| `NUXT_PUBLIC_DASHBOARD_URL` | Optional admin panel URL |
+
 ## Development Server
 
-Start the Nuxt development server on `http://localhost:3000`:
+Start the Nuxt development server on `http://localhost:3050` (or the port set in `.env`):
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## Build for Production (SSG)
 
-When you're ready to deploy and generate a fully static site, build the project for production:
+Generate a fully static site:
 
 ```bash
-npm run generate
+pnpm generate
 ```
 
-## Build for Production
+## Build for Production (SSR)
 
-When you're ready to deploy, build the project for production:
+Build for server-side rendering deployment:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 ## Preview the Production Build
 
-To preview your production build:
+Preview the production build locally:
 
 ```bash
-npm run preview
+pnpm preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+See the [Nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for hosting options.
 
-## Contributing ✨
+## Documentation
 
-Feel free to contribute to the project! If you find bugs or have feature suggestions, please open an issue or create a pull request.
+Additional guides live in the [`docs/`](./docs/) directory:
+
+- [API composables](./docs/composables/api.md)
+- [API plugin](./docs/plugins/api.md)
+- [i18n composables](./docs/composables/i18n.md)
+- [Utility composables](./docs/composables/utility.md)
+- [Directives](./docs/directives.md)
+- [Utils & schemas](./docs/utils.md)
+
+## Contributing
+
+Contributions are welcome. If you find bugs or have feature suggestions, please open an issue or create a pull request.
