@@ -17,7 +17,7 @@ const currentLocale = computed(() => {
 useHead({
   htmlAttrs: {
     lang: () => currentLocale.value?.language,
-    dir: () => currentLocale.value?.dir ?? "rtl",
+    dir: () => currentLocale.value?.dir ?? "ltr",
     class: () => (currentLocale.value?.dir === "ltr" ? "font-en" : "font-fa"),
   },
 });

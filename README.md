@@ -19,7 +19,7 @@
 
 - **Nuxt 4**: Built on Nuxt 4 with strict TypeScript, ESLint, and runtime type checking enabled.
 - **Nuxt UI + Tailwind CSS v4**: Accessible UI components, dark mode (default), fonts, and icons via Nuxt UI; Tailwind v4 integrated through the Vite plugin.
-- **Internationalization (i18n)**: Persian (default, RTL) and English locales with locale-aware date, number, and currency formatters.
+- **Internationalization (i18n)**: English (default, LTR) and Persian locales with locale-aware date, number, and currency formatters.
 - **SEO**: Meta tags, schema, sitemap, and static OG image generation via `@nuxtjs/seo`.
 - **State Management**: Pinia with a starter store setup.
 - **Form Validation**: Reusable Zod schemas for common fields (phone, email, national code, and more).

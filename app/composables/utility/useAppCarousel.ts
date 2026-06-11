@@ -16,7 +16,7 @@ export function useAppCarousel(
 ) {
   const { localeProperties } = useI18n();
   const dir = computed(
-    () => (localeProperties.value.dir ?? "rtl") as "ltr" | "rtl",
+    () => (localeProperties.value.dir ?? "ltr") as "ltr" | "rtl",
   );
 
   // #region --------- Embla Instance ---------

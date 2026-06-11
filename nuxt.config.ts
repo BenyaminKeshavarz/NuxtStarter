@@ -21,7 +21,7 @@ export default defineNuxtConfig({
       sourcemap: false, // Disable sourcemaps to avoid Tailwind CSS v4 warnings
     },
     optimizeDeps: {
-      include: ["@unhead/schema-org/vue", "maska/vue"],
+      include: ["maska/vue"],
     },
   },
 
@@ -47,7 +47,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Nuxt Starter Template", // TODO: Change title.
-      htmlAttrs: { lang: "fa-IR", dir: "rtl" },
+      htmlAttrs: { lang: "en-US", dir: "ltr" },
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -86,22 +86,9 @@ export default defineNuxtConfig({
   /* ### i18n Configuration */
   i18n: {
     langDir: "locales",
-    defaultLocale: "fa",
-    defaultDirection: "rtl",
+    defaultLocale: "en",
+    defaultDirection: "ltr",
     locales: [
-      {
-        code: "fa",
-        name: "Persian",
-        localName: "فارسی",
-        language: "fa-IR",
-        file: "fa.json",
-        dir: "rtl",
-        currency: {
-          code: "IRR",
-          symbol: "تومان",
-          position: "after",
-        },
-      },
       {
         code: "en",
         name: "English",
@@ -115,6 +102,19 @@ export default defineNuxtConfig({
           position: "before",
         },
       },
+      {
+        code: "fa",
+        name: "Persian",
+        localName: "فارسی",
+        language: "fa-IR",
+        file: "fa.json",
+        dir: "rtl",
+        currency: {
+          code: "IRR",
+          symbol: "تومان",
+          position: "after",
+        },
+      },
     ],
     strategy: "prefix_except_default",
     detectBrowserLanguage: {
@@ -122,7 +122,7 @@ export default defineNuxtConfig({
       cookieKey: "i18n_redirected",
       redirectOn: "root",
       alwaysRedirect: false,
-      fallbackLocale: "fa",
+      fallbackLocale: "en",
     },
     debug: false,
   },
