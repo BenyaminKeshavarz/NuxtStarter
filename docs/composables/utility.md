@@ -40,12 +40,12 @@ Global open/close state for overlays (modals, drawers, menus, loaders).
 
 **API:**
 
-| Return    | Type              | Description              |
-| --------- | ----------------- | ------------------------ |
-| `isOpen`  | `Ref<boolean>`    | Current visibility state |
-| `open`    | `() => void`      | Open the overlay         |
-| `close`   | `() => void`      | Close the overlay        |
-| `toggle`  | `() => void`      | Toggle visibility        |
+| Return   | Type           | Description              |
+| -------- | -------------- | ------------------------ |
+| `isOpen` | `Ref<boolean>` | Current visibility state |
+| `open`   | `() => void`   | Open the overlay         |
+| `close`  | `() => void`   | Close the overlay        |
+| `toggle` | `() => void`   | Toggle visibility        |
 
 **Example:**
 
@@ -76,20 +76,20 @@ Smooth scrolling helpers with optional completion callbacks.
 
 **API:**
 
-| Method             | Description                                      |
-| ------------------ | ------------------------------------------------ |
-| `scrollToElement`  | Scroll to an element by `id` or `HTMLElement`    |
-| `scrollToTop`      | Scroll to the top of the page                    |
-| `scrollToBottom`   | Scroll to the bottom of the page                 |
+| Method            | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `scrollToElement` | Scroll to an element by `id` or `HTMLElement` |
+| `scrollToTop`     | Scroll to the top of the page                 |
+| `scrollToBottom`  | Scroll to the bottom of the page              |
 
 **Options (`ScrollOptions`):**
 
-| Option       | Type               | Default    | Description                                      |
-| ------------ | ------------------ | ---------- | ------------------------------------------------ |
-| `offset`     | `number`           | —          | Manual top offset in px (for fixed headers)      |
-| `behavior`   | `ScrollBehavior`   | `"smooth"` | Native scroll behavior                           |
-| `onComplete` | `() => void`       | —          | Called after scroll settles                      |
-| `onError`    | `(Error) => void`  | —          | Called when the target element is missing        |
+| Option       | Type              | Default    | Description                                 |
+| ------------ | ----------------- | ---------- | ------------------------------------------- |
+| `offset`     | `number`          | —          | Manual top offset in px (for fixed headers) |
+| `behavior`   | `ScrollBehavior`  | `"smooth"` | Native scroll behavior                      |
+| `onComplete` | `() => void`      | —          | Called after scroll settles                 |
+| `onError`    | `(Error) => void` | —          | Called when the target element is missing   |
 
 **Example:**
 
@@ -164,23 +164,23 @@ Embla Carousel wrapper with i18n direction, pagination dots, and navigation help
 
 Extends [Embla options](https://www.embla-carousel.com/api/options/). Additional option:
 
-| Option               | Type      | Description                                           |
-| -------------------- | --------- | ----------------------------------------------------- |
-| `dynamicPagination`  | `boolean` | Collapse distant dots when there are more than 5 slides |
+| Option              | Type      | Description                                             |
+| ------------------- | --------- | ------------------------------------------------------- |
+| `dynamicPagination` | `boolean` | Collapse distant dots when there are more than 5 slides |
 
 **Returns:**
 
-| Name                | Description                          |
-| ------------------- | ------------------------------------ |
+| Name                | Description                            |
+| ------------------- | -------------------------------------- |
 | `emblaRef`          | Template ref for the carousel viewport |
-| `emblaApi`          | Embla API instance                   |
-| `currentSlideIndex` | Active slide index                   |
-| `paginationDots`    | Dot metadata for custom pagination   |
-| `canScrollPrev`     | Whether previous slide is available  |
-| `canScrollNext`     | Whether next slide is available      |
-| `scrollToSlide`     | Go to slide by index                 |
-| `scrollPrev`        | Previous slide                       |
-| `scrollNext`        | Next slide                           |
+| `emblaApi`          | Embla API instance                     |
+| `currentSlideIndex` | Active slide index                     |
+| `paginationDots`    | Dot metadata for custom pagination     |
+| `canScrollPrev`     | Whether previous slide is available    |
+| `canScrollNext`     | Whether next slide is available        |
+| `scrollToSlide`     | Go to slide by index                   |
+| `scrollPrev`        | Previous slide                         |
+| `scrollNext`        | Next slide                             |
 
 **Example:**
 
@@ -205,7 +205,11 @@ const {
   <div>
     <div ref="emblaRef" class="overflow-hidden">
       <div class="flex">
-        <div v-for="slide in slides" :key="slide.id" class="min-w-0 shrink-0 grow-0 basis-full">
+        <div
+          v-for="slide in slides"
+          :key="slide.id"
+          class="min-w-0 shrink-0 grow-0 basis-full"
+        >
           ...
         </div>
       </div>
