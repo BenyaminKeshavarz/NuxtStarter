@@ -1,5 +1,11 @@
 {
   "home": "",
   "about": "",
-  "contact": ""
+  "contact": "",
+  "app": {
+    "loadingOverlay": {
+      "title": "Loading",
+      "description": "Please wait while the app loads."
+    }
+  }
 }

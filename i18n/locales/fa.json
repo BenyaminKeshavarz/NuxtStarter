@@ -1,5 +1,11 @@
 {
   "home": "",
   "about": "",
-  "contact": ""
+  "contact": "",
+  "app": {
+    "loadingOverlay": {
+      "title": "در حال بارگذاری",
+      "description": "لطفاً تا پایان بارگذاری منتظر بمانید."
+    }
+  }
 }

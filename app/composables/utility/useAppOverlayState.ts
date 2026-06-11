@@ -1,5 +1,5 @@
-// TODO: Add overlay names.
-export type AppOverlayName = string; // "search" | "logout" | "loading"
+// TODO: Add overlay names as Union type.
+export type AppOverlayName = "loading";
 
 /**
  * Shared open/close state for app-wide overlays (modals, menus, loaders, etc.).
