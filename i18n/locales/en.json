@@ -1,11 +1,105 @@
 {
-  "home": "",
-  "about": "",
-  "contact": "",
+  "home": "Home",
+  "about": "About",
+  "contact": "Contact",
   "app": {
     "loadingOverlay": {
       "title": "Loading",
       "description": "Please wait while the app loads."
+    }
+  },
+  "landing": {
+    "meta": {
+      "title": "NuxtStarter — Personal Nuxt Starter Template",
+      "description": "A personal Nuxt 4 starter for launching projects fast — bilingual i18n, typed API layer, Pinia, Nuxt UI, and production-ready defaults."
+    },
+    "header": {
+      "features": "Features",
+      "stack": "Stack"
+    },
+    "footer": {
+      "copyright": "Built with NuxtStarter • © {year}"
+    },
+    "hero": {
+      "title": "NuxtStarter",
+      "description": "Your personal Nuxt 4 starter for launching projects fast. Bilingual support, a typed API layer, Pinia, and polished UI — without spending days on boilerplate.",
+      "getStarted": "Get started"
+    },
+    "features": {
+      "title": "What you get out of the box",
+      "description": "A production-minded foundation so you can focus on your product, not project setup.",
+      "items": {
+        "productionReady": {
+          "title": "Production-ready baseline",
+          "description": "Strict TypeScript, ESLint, Tailwind CSS v4, and {'@'}nuxtjs/seo configured upfront. Ship features, not scaffolding."
+        },
+        "i18n": {
+          "title": "Bilingual by default",
+          "description": "Persian (RTL) and English (LTR) with locale routing, browser detection, and number, date, and currency formatters."
+        },
+        "performance": {
+          "title": "Fast by design",
+          "description": "SSR and SSG support, a prerendered home page, Nuxt Image, and automatic code splitting for quick loads."
+        },
+        "ui": {
+          "title": "UI with Nuxt UI",
+          "description": "Nuxt UI design system with dark mode by default, consistent spacing, and accessible, responsive components."
+        },
+        "dx": {
+          "title": "Smooth developer experience",
+          "description": "Auto-imports, strict TypeScript, a global $api plugin with error handling, and ready-made composables for API, i18n, and utilities."
+        },
+        "scale": {
+          "title": "Built to grow",
+          "description": "Modular structure with Pinia, centralized error handling, runtime config, and an organized folder layout for larger apps."
+        }
+      }
+    },
+    "stack": {
+      "title": "Pre-configured essentials",
+      "description": "The core stack every Nuxt project needs — installed and wired up for you.",
+      "items": {
+        "nuxtUi": {
+          "title": "Nuxt UI",
+          "description": "Full design system with 100+ components, dark mode, typography, and an integrated icon system.",
+          "docsUrl": "https://ui.nuxt.com"
+        },
+        "pinia": {
+          "title": "Pinia",
+          "description": "Modern Vue state management with TypeScript support, devtools, and a modular store structure.",
+          "docsUrl": "https://pinia.vuejs.org"
+        },
+        "typescript": {
+          "title": "TypeScript",
+          "description": "Strict mode and type checking enabled — type-safe from composables to components.",
+          "docsUrl": "https://www.typescriptlang.org"
+        },
+        "tailwind": {
+          "title": "Tailwind CSS",
+          "description": "Tailwind v4 with the Vite plugin, custom design tokens, and project utilities.",
+          "docsUrl": "https://tailwindcss.com"
+        },
+        "i18n": {
+          "title": "i18n",
+          "description": "Multilingual with Persian (RTL) and English (LTR), locale routing, formatters, and cookie detection.",
+          "docsUrl": "https://i18n.nuxtjs.org"
+        },
+        "vueuse": {
+          "title": "VueUse",
+          "description": "Collection of essential Vue composables — local storage, scroll, window size, and more, already used across utility composables.",
+          "docsUrl": "https://vueuse.org"
+        },
+        "emblaCarousel": {
+          "title": "Embla Carousel",
+          "description": "Lightweight, extensible carousel engine with a ready-made useAppCarousel composable for sliders, galleries, and swipeable content.",
+          "docsUrl": "https://www.embla-carousel.com"
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to start your next project?",
+      "description": "Clone the repo, set your environment variables, and start building today.",
+      "startBuilding": "Get started"
     }
   }
 }

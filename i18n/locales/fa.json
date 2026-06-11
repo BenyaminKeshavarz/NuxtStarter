@@ -1,11 +1,105 @@
 {
-  "home": "",
-  "about": "",
-  "contact": "",
+  "home": "خانه",
+  "about": "درباره",
+  "contact": "تماس",
   "app": {
     "loadingOverlay": {
       "title": "در حال بارگذاری",
       "description": "لطفاً تا پایان بارگذاری منتظر بمانید."
+    }
+  },
+  "landing": {
+    "meta": {
+      "title": "NuxtStarter — قالب آماده شخصی Nuxt",
+      "description": "قالب شخصی Nuxt 4 برای شروع سریع پروژه — چندزبانگی، لایه API تایپ‌شده، Pinia، Nuxt UI و تنظیمات آماده production."
+    },
+    "header": {
+      "features": "ویژگی‌ها",
+      "stack": "فناوری‌ها"
+    },
+    "footer": {
+      "copyright": "ساخته‌شده با NuxtStarter • © {year}"
+    },
+    "hero": {
+      "title": "NuxtStarter",
+      "description": "قالب شخصی Nuxt 4 برای راه‌اندازی سریع پروژه‌ها. پشتیبانی دو زبانه، لایه API تایپ‌شده، Pinia و رابط کاربری آماده — بدون اتلاف وقت روی کدهای تکراری.",
+      "getStarted": "شروع کنید"
+    },
+    "features": {
+      "title": "امکاناتی که از همان روز اول در اختیار دارید",
+      "description": "زیرساختی production-ready تا مستقیم روی محصول خودتان تمرکز کنید، نه راه‌اندازی پروژه.",
+      "items": {
+        "productionReady": {
+          "title": "آماده production از روز اول",
+          "description": "TypeScript با حالت strict، ESLint، Tailwind CSS v4 و {'@'}nuxtjs/seo از پیش پیکربندی شده‌اند. روی ویژگی‌های محصول تمرکز کنید، نه راه‌اندازی ابزارها."
+        },
+        "i18n": {
+          "title": "دو زبانه به‌صورت پیش‌فرض",
+          "description": "فارسی (راست‌به‌چپ) و انگلیسی (چپ‌به‌راست) با مسیریابی چندزبانه، تشخیص زبان مرورگر و قالب‌بندی عدد، تاریخ و ارز."
+        },
+        "performance": {
+          "title": "سریع و بهینه",
+          "description": "پشتیبانی SSR و SSG، پیش‌رندر صفحه اصلی، Nuxt Image و تقسیم خودکار کد برای بارگذاری سریع."
+        },
+        "ui": {
+          "title": "رابط کاربری با Nuxt UI",
+          "description": "سیستم طراحی Nuxt UI با حالت تاریک پیش‌فرض، فاصله‌گذاری یکدست و کامپوننت‌های در دسترس و واکنش‌گرا."
+        },
+        "dx": {
+          "title": "تجربه توسعه روان",
+          "description": "واردسازی خودکار، TypeScript، پلاگین سراسری $api با مدیریت خطا و composableهای آماده برای API، i18n و ابزارهای رایج."
+        },
+        "scale": {
+          "title": "معماری قابل گسترش",
+          "description": "ساختار ماژولار با Pinia، مدیریت متمرکز خطا، runtime config و پوشه‌بندی منظم برای پروژه‌های بزرگ‌تر."
+        }
+      }
+    },
+    "stack": {
+      "title": "ابزارهای از پیش آماده",
+      "description": "هسته اصلی هر پروژه Nuxt — نصب و پیکربندی شده، بدون نیاز به راه‌اندازی اضافه.",
+      "items": {
+        "nuxtUi": {
+          "title": "Nuxt UI",
+          "description": "سیستم طراحی کامل با بیش از ۱۰۰ کامپوننت، حالت تاریک، تایپوگرافی و مجموعه آیکون یکپارچه.",
+          "docsUrl": "https://ui.nuxt.com"
+        },
+        "pinia": {
+          "title": "Pinia",
+          "description": "مدیریت state مدرن Vue با پشتیبانی TypeScript، devtools و ساختار store ماژولار.",
+          "docsUrl": "https://pinia.vuejs.org"
+        },
+        "typescript": {
+          "title": "TypeScript",
+          "description": "حالت strict و بررسی نوع فعال — ایمن در برابر خطای نوع از composable تا component.",
+          "docsUrl": "https://www.typescriptlang.org"
+        },
+        "tailwind": {
+          "title": "Tailwind CSS",
+          "description": "Tailwind v4 با افزونه Vite، توکن‌های طراحی سفارشی و کلاس‌های utility پروژه.",
+          "docsUrl": "https://tailwindcss.com"
+        },
+        "i18n": {
+          "title": "i18n",
+          "description": "چندزبانگی با فارسی (راست‌به‌چپ) و انگلیسی (چپ‌به‌راست)، مسیریابی locale، قالب‌بندها و تشخیص کوکی.",
+          "docsUrl": "https://i18n.nuxtjs.org"
+        },
+        "vueuse": {
+          "title": "VueUse",
+          "description": "مجموعه composableهای ضروری Vue — local storage، scroll، اندازه پنجره و بیشتر؛ از قبل در composableهای utility استفاده شده.",
+          "docsUrl": "https://vueuse.org"
+        },
+        "emblaCarousel": {
+          "title": "Embla Carousel",
+          "description": "موتور کاروسل سبک و قابل گسترش با composable آماده useAppCarousel برای اسلایدر، گالری و محتوای swipe.",
+          "docsUrl": "https://www.embla-carousel.com"
+        }
+      }
+    },
+    "cta": {
+      "title": "آماده شروع پروژه بعدی‌تان هستید؟",
+      "description": "مخزن را clone کنید، متغیرهای محیطی را تنظیم کنید و همین امروز توسعه را شروع کنید.",
+      "startBuilding": "شروع کنید"
     }
   }
 }
