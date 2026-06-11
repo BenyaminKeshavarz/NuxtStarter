@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   /* ### Devtools Configuration */
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   /* ### Vite Configuration */
   vite: {
@@ -68,7 +68,7 @@ export default defineNuxtConfig({
 
   /* ### UI Configuration */
   ui: {
-    fonts: true, 
+    fonts: true,
   },
   colorMode: {
     preference: "dark",
