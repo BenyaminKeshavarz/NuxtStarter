@@ -31,7 +31,7 @@ const { isOpen } = useAppOverlayState("loading");
         <!-- Logo -->
         <figure class="shrink-0">
           <img
-            src="~/assets/images/logo.png"
+            src="~/assets/images/logo.svg"
             alt="Logo"
             class="w-28 object-contain sm:w-37"
           />
@@ -41,7 +41,7 @@ const { isOpen } = useAppOverlayState("loading");
         <div class="flex items-center justify-center">
           <UIcon
             name="i-custom-loading-spinner"
-            class="text-secondary size-8 sm:size-10"
+            class="text-primary size-8 sm:size-10"
           />
         </div>
       </div>

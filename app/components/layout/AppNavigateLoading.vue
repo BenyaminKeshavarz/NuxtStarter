@@ -8,11 +8,11 @@ const { isLoading } = useLoadingIndicator();
     :class="{ 'opacity-0': !isLoading }"
   >
     <div
-      class="flex-center bg-theme-light shadow-surround border-default/70 rounded-xl border-2 p-3"
+      class="border-default/70 flex items-center justify-center rounded-xl border-2 bg-default p-3 shadow-lg"
     >
       <UIcon
         name="i-lucide-loader"
-        class="text-secondary size-6 animate-spin sm:size-8"
+        class="text-primary size-6 animate-spin sm:size-8"
       />
     </div>
   </div>

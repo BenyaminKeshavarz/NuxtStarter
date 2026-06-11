@@ -29,6 +29,7 @@ useHead({
   htmlAttrs: {
     lang: locale.value,
     dir: locale.value === "fa" ? "rtl" : "ltr",
+    class: locale.value === "fa" ? "font-fa" : "font-en",
   },
 });
 
