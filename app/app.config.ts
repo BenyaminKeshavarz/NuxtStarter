@@ -6,5 +6,10 @@ export default defineAppConfig({
     },
 
     // TODO: Add UI configuration here.
+    navigationMenu: {
+      slots: {
+        list: 'rtl:dir-rtl',
+      }
+    }
   },
 });

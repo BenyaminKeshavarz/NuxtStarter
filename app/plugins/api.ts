@@ -1,4 +1,8 @@
-import type { FetchResponse } from "ofetch";
+import type { FetchOptions, FetchResponse } from "ofetch";
+
+type ApiRequest = string;
+type ApiOptions = FetchOptions;
+type ApiFetchFn = (request: ApiRequest, options?: ApiOptions) => Promise<unknown>;
 
 export default defineNuxtPlugin((nuxtApp) => {
   const runtimeConfig = useRuntimeConfig();
@@ -36,9 +40,9 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // 2. Wrapper for request interceptors — extend here (auth, logging, retry, etc.)
   const executeRequest = async <T = unknown>(
-    fetchMethod: typeof baseFetch | typeof baseFetch.raw,
-    request: Parameters<typeof baseFetch>[0],
-    options: Parameters<typeof baseFetch>[1] = {},
+    fetchMethod: ApiFetchFn,
+    request: ApiRequest,
+    options: ApiOptions = {},
   ): Promise<T> => {
     try {
       return (await fetchMethod(request, options)) as T;
@@ -49,23 +53,23 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // 3. Create the customized $api object with proper TypeScript signatures
   interface CustomApi {
-    <T = unknown>(request: Parameters<typeof baseFetch>[0], options?: Parameters<typeof baseFetch>[1]): Promise<T>;
-    raw: <T = unknown>(request: Parameters<typeof baseFetch>[0], options?: Parameters<typeof baseFetch>[1]) => Promise<FetchResponse<T>>;
+    <T = unknown>(request: ApiRequest, options?: ApiOptions): Promise<T>;
+    raw: <T = unknown>(request: ApiRequest, options?: ApiOptions) => Promise<FetchResponse<T>>;
     create: typeof baseFetch.create;
   }
 
   const api: CustomApi = async <T = unknown>(
-    request: Parameters<typeof baseFetch>[0],
-    options?: Parameters<typeof baseFetch>[1],
+    request: ApiRequest,
+    options?: ApiOptions,
   ) => {
-    return executeRequest<T>(baseFetch, request, options);
+    return executeRequest<T>(baseFetch as ApiFetchFn, request, options);
   };
 
   api.raw = async <T = unknown>(
-    request: Parameters<typeof baseFetch>[0],
-    options?: Parameters<typeof baseFetch>[1],
+    request: ApiRequest,
+    options?: ApiOptions,
   ) => {
-    return executeRequest<FetchResponse<T>>(baseFetch.raw, request, options);
+    return executeRequest<FetchResponse<T>>(baseFetch.raw as ApiFetchFn, request, options);
   };
 
   api.create = baseFetch.create;

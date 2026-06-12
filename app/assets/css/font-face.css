@@ -28,7 +28,7 @@
   font-family: "Vazir";
   font-weight: 100;
   src: url("~/assets/fonts/Vazir/Vazir-Thin.ttf") format("truetype");
-  font-display: block;
+  font-display: swap;
 }
 
 /* 300 - Light */
@@ -36,7 +36,7 @@
   font-family: "Vazir";
   font-weight: 300;
   src: url("~/assets/fonts/Vazir/Vazir-Light.ttf") format("truetype");
-  font-display: block;
+  font-display: swap;
 }
 
 /* 400 - Regular */
@@ -44,7 +44,7 @@
   font-family: "Vazir";
   font-weight: 400;
   src: url("~/assets/fonts/Vazir/Vazir.ttf") format("truetype");
-  font-display: block;
+  font-display: swap;
 }
 
 /* 500 - Medium */
@@ -52,7 +52,7 @@
   font-family: "Vazir";
   font-weight: 500;
   src: url("~/assets/fonts/Vazir/Vazir-Medium.ttf") format("truetype");
-  font-display: block;
+  font-display: swap;
 }
 
 /* 700 - Bold */
@@ -60,5 +60,5 @@
   font-family: "Vazir";
   font-weight: 700;
   src: url("~/assets/fonts/Vazir/Vazir-Bold.ttf") format("truetype");
-  font-display: block;
+  font-display: swap;
 }
