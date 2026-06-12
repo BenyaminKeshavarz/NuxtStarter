@@ -18,6 +18,9 @@ const toggleTheme = async (event: PointerEvent) => {
 
   const willBeDark = !isDark.value;
   const root = document.documentElement;
+  const el = event.currentTarget;
+
+  if (!(el instanceof HTMLElement)) return;
 
   if (
     !document.startViewTransition ||
