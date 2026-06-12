@@ -217,6 +217,11 @@
   }
 
   /* * Theme toggle — Telegram-style circular reveal (see ThemeSwitcher.vue) */
+  ::view-transition-group(root) {
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+  }
+
   ::view-transition-image-pair(root) {
     isolation: auto;
   }
@@ -230,7 +235,7 @@
   /* Light → Dark: light shrinks toward the click point, revealing dark */
   html[data-theme-transition="to-dark"]::view-transition-old(root) {
     z-index: 9999;
-    animation: theme-circle-shrink 500ms ease-in-out forwards;
+    animation: theme-circle-shrink 500ms ease-out forwards;
   }
 
   html[data-theme-transition="to-dark"]::view-transition-new(root) {
@@ -240,7 +245,7 @@
   /* Dark → Light: light expands from the click point */
   html[data-theme-transition="to-light"]::view-transition-new(root) {
     z-index: 9999;
-    animation: theme-circle-expand 500ms ease-in-out forwards;
+    animation: theme-circle-expand 500ms ease-out forwards;
   }
 
   html[data-theme-transition="to-light"]::view-transition-old(root) {

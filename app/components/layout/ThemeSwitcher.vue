@@ -21,9 +21,10 @@ const toggleTheme = async (event: MouseEvent) => {
     return;
   }
 
-  const x = event.clientX;
-  const y = event.clientY;
-  // Radius large enough to cover the viewport from the click point
+  const vv = window.visualViewport;
+  // Pointer coords are visual-viewport-relative; view-transition clip-path uses layout coords
+  const x = event.clientX + (vv?.offsetLeft ?? 0);
+  const y = event.clientY + (vv?.offsetTop ?? 0);
   const endRadius = Math.hypot(
     Math.max(x, window.innerWidth - x),
     Math.max(y, window.innerHeight - y),
