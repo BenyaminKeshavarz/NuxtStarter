@@ -45,6 +45,10 @@
           "title": "UI with Nuxt UI",
           "description": "Nuxt UI design system with dark mode by default, consistent spacing, and accessible, responsive components."
         },
+        "themeToggle": {
+          "title": "Animated theme toggle",
+          "description": "Telegram-style dark/light switch with a circular View Transition — light expands from the button, dark shrinks back to it."
+        },
         "dx": {
           "title": "Smooth developer experience",
           "description": "Auto-imports, strict TypeScript, a global $api plugin with error handling, and ready-made composables for API, i18n, and utilities."

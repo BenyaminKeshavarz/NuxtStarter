@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from "@nuxt/ui";
 import AppLogo from "~/components/layout/AppLogo.vue";
 import LanguageSwitcher from "~/components/layout/LanguageSwitcher.vue";
+import ThemeSwitcher from "~/components/layout/ThemeSwitcher.vue";
+import type { NavigationMenuItem } from "@nuxt/ui";
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -38,7 +39,9 @@ const navItems = computed<NavigationMenuItem[]>(() => [
 
       <template #right>
         <LanguageSwitcher class="max-sm:hidden" />
-        <UColorModeButton />
+
+        <ThemeSwitcher />
+
         <UButton
           :to="githubUrl"
           target="_blank"

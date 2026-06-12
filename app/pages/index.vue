@@ -36,6 +36,7 @@ const featureIcons = [
   "i-lucide-languages",
   "i-lucide-zap",
   "i-lucide-blocks",
+  "i-lucide-sun-moon",
   "i-lucide-code-2",
   "i-lucide-shield-check",
 ] as const;
@@ -45,6 +46,7 @@ const featureKeys = [
   "i18n",
   "performance",
   "ui",
+  "themeToggle",
   "dx",
   "scale",
 ] as const;
