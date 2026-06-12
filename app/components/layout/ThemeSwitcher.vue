@@ -3,16 +3,22 @@ const colorMode = useColorMode();
 
 const isDark = computed(() => colorMode.value === "dark");
 
-/**
- * Telegram-style theme toggle via View Transition API.
- * Circle animation is driven by CSS in main.css (uses --theme-transition-* vars
- * and data-theme-transition to pick expand vs shrink direction).
- */
-const toggleTheme = async (event: MouseEvent) => {
+/** Pointer coords → layout/snapshot space (required for view-transition clip-path on mobile) */
+function getCircleOrigin(event: PointerEvent) {
+  const vv = window.visualViewport;
+
+  return {
+    x: event.clientX + (vv?.offsetLeft ?? 0),
+    y: event.clientY + (vv?.offsetTop ?? 0),
+  };
+}
+
+const toggleTheme = async (event: PointerEvent) => {
+  if (event.button !== 0) return;
+
   const willBeDark = !isDark.value;
   const root = document.documentElement;
 
-  // Instant switch when animation isn't supported or user prefers reduced motion
   if (
     !document.startViewTransition ||
     window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -21,37 +27,44 @@ const toggleTheme = async (event: MouseEvent) => {
     return;
   }
 
-  const vv = window.visualViewport;
-  // Pointer coords are visual-viewport-relative; view-transition clip-path uses layout coords
-  const x = event.clientX + (vv?.offsetLeft ?? 0);
-  const y = event.clientY + (vv?.offsetTop ?? 0);
+  const { x, y } = getCircleOrigin(event);
   const endRadius = Math.hypot(
     Math.max(x, window.innerWidth - x),
     Math.max(y, window.innerHeight - y),
   );
 
-  // Must be set before startViewTransition — CSS keyframes read these during the transition
-  root.style.setProperty("--theme-transition-x", `${x}px`);
-  root.style.setProperty("--theme-transition-y", `${y}px`);
-  root.style.setProperty("--theme-transition-r", `${endRadius}px`);
   root.dataset.themeTransition = willBeDark ? "to-dark" : "to-light";
 
   const transition = document.startViewTransition(async () => {
     colorMode.preference = willBeDark ? "dark" : "light";
-    // Sync class immediately so the browser captures the correct "new" snapshot
-    // (colorMode may update the DOM asynchronously via Vue)
     root.classList.toggle("dark", willBeDark);
     await nextTick();
   });
 
   try {
+    await transition.ready;
+
+    const clipPath = [
+      `circle(0px at ${x}px ${y}px)`,
+      `circle(${endRadius}px at ${x}px ${y}px)`,
+    ];
+
+    const animation = document.documentElement.animate(
+      { clipPath: willBeDark ? [...clipPath].reverse() : clipPath },
+      {
+        duration: 500,
+        easing: "ease-out",
+        fill: "forwards",
+        pseudoElement: willBeDark
+          ? "::view-transition-old(root)"
+          : "::view-transition-new(root)",
+      },
+    );
+
+    await animation.finished;
     await transition.finished;
   } finally {
-    // Remove transition-only state so it doesn't affect future renders
     delete root.dataset.themeTransition;
-    root.style.removeProperty("--theme-transition-x");
-    root.style.removeProperty("--theme-transition-y");
-    root.style.removeProperty("--theme-transition-r");
   }
 };
 </script>
@@ -63,7 +76,7 @@ const toggleTheme = async (event: MouseEvent) => {
       color="neutral"
       variant="ghost"
       :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
-      @click="toggleTheme"
+      @pointerdown="toggleTheme"
     />
 
     <template #fallback>
