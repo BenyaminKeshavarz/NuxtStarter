@@ -3,19 +3,7 @@ const colorMode = useColorMode();
 
 const isDark = computed(() => colorMode.value === "dark");
 
-/** Pointer coords → layout/snapshot space (required for view-transition clip-path on mobile) */
-function getCircleOrigin(event: PointerEvent) {
-  const vv = window.visualViewport;
-
-  return {
-    x: event.clientX + (vv?.offsetLeft ?? 0),
-    y: event.clientY + (vv?.offsetTop ?? 0),
-  };
-}
-
-const toggleTheme = async (event: PointerEvent) => {
-  if (event.button !== 0) return;
-
+const toggleTheme = async (event: MouseEvent) => {
   const willBeDark = !isDark.value;
   const root = document.documentElement;
   const el = event.currentTarget;
@@ -30,11 +18,9 @@ const toggleTheme = async (event: PointerEvent) => {
     return;
   }
 
-  const { x, y } = getCircleOrigin(event);
-  const endRadius = Math.hypot(
-    Math.max(x, window.innerWidth - x),
-    Math.max(y, window.innerHeight - y),
-  );
+  const rect = el.getBoundingClientRect();
+  const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
+  const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
 
   root.dataset.themeTransition = willBeDark ? "to-dark" : "to-light";
 
@@ -48,8 +34,8 @@ const toggleTheme = async (event: PointerEvent) => {
     await transition.ready;
 
     const clipPath = [
-      `circle(0px at ${x}px ${y}px)`,
-      `circle(${endRadius}px at ${x}px ${y}px)`,
+      `circle(0% at ${x}% ${y}%)`,
+      `circle(150vmax at ${x}% ${y}%)`,
     ];
 
     const animation = document.documentElement.animate(
@@ -79,7 +65,7 @@ const toggleTheme = async (event: PointerEvent) => {
       color="neutral"
       variant="ghost"
       :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
-      @pointerdown="toggleTheme"
+      @click="toggleTheme"
     />
 
     <template #fallback>
