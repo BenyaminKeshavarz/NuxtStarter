@@ -22,6 +22,8 @@ const toggleTheme = async (event: MouseEvent) => {
   const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
   const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
 
+  root.style.setProperty("--theme-transition-x", `${x}%`);
+  root.style.setProperty("--theme-transition-y", `${y}%`);
   root.dataset.themeTransition = willBeDark ? "to-dark" : "to-light";
 
   const transition = document.startViewTransition(async () => {
@@ -31,29 +33,11 @@ const toggleTheme = async (event: MouseEvent) => {
   });
 
   try {
-    await transition.ready;
-
-    const clipPath = [
-      `circle(0% at ${x}% ${y}%)`,
-      `circle(150vmax at ${x}% ${y}%)`,
-    ];
-
-    const animation = document.documentElement.animate(
-      { clipPath: willBeDark ? [...clipPath].reverse() : clipPath },
-      {
-        duration: 500,
-        easing: "ease-out",
-        fill: "forwards",
-        pseudoElement: willBeDark
-          ? "::view-transition-old(root)"
-          : "::view-transition-new(root)",
-      },
-    );
-
-    await animation.finished;
     await transition.finished;
   } finally {
     delete root.dataset.themeTransition;
+    root.style.removeProperty("--theme-transition-x");
+    root.style.removeProperty("--theme-transition-y");
   }
 };
 </script>

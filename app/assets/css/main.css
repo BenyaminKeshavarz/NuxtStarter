@@ -233,6 +233,7 @@
 
   html[data-theme-transition="to-dark"]::view-transition-old(root) {
     z-index: 9999;
+    animation: theme-circle-shrink 500ms ease-out forwards;
   }
 
   html[data-theme-transition="to-dark"]::view-transition-new(root) {
@@ -241,9 +242,36 @@
 
   html[data-theme-transition="to-light"]::view-transition-new(root) {
     z-index: 9999;
+    animation: theme-circle-expand 500ms ease-out forwards;
   }
 
   html[data-theme-transition="to-light"]::view-transition-old(root) {
     z-index: 1;
+  }
+
+  @keyframes theme-circle-expand {
+    from {
+      clip-path: circle(
+        0% at var(--theme-transition-x) var(--theme-transition-y)
+      );
+    }
+    to {
+      clip-path: circle(
+        150vmax at var(--theme-transition-x) var(--theme-transition-y)
+      );
+    }
+  }
+
+  @keyframes theme-circle-shrink {
+    from {
+      clip-path: circle(
+        150vmax at var(--theme-transition-x) var(--theme-transition-y)
+      );
+    }
+    to {
+      clip-path: circle(
+        0% at var(--theme-transition-x) var(--theme-transition-y)
+      );
+    }
   }
 }
