@@ -155,7 +155,10 @@ function parseError(
   const responseData = extractResponseData(errorObj);
   const apiMessages = extractMessages(responseData);
   const fallback =
-    errorObj?.message ?? httpConfig?.message ?? DEFAULT_ERROR.message;
+    options.fallbackMessage ??
+    errorObj?.message ??
+    httpConfig?.message ??
+    DEFAULT_ERROR.message;
   const messages = apiMessages.length > 0 ? apiMessages : [fallback];
 
   const structuredError: StructuredError = {
@@ -181,6 +184,20 @@ function parseError(
     toastTitle,
     toastMessages,
   };
+}
+
+export function parseApiError(
+  error: unknown,
+  options: Partial<ErrorHandlerOptions> = {},
+): ParsedErrorResult {
+  return parseError(error, options);
+}
+
+export function getErrorMessage(
+  error: unknown,
+  options: Partial<ErrorHandlerOptions> = {},
+): string {
+  return parseError(error, options).structuredError.message;
 }
 
 // #endregion
@@ -290,7 +307,7 @@ export function useErrorHandler() {
     if (mergedOptions.throwError) throw error;
   }
 
-  return { handleError };
+  return { handleError, parseApiError, getErrorMessage };
 }
 
 // #endregion

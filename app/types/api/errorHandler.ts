@@ -24,6 +24,8 @@ export interface ErrorHandlerOptions extends ErrorHandlingOptions {
   toastType?: "error" | "warning" | "info" | "success";
   toastDuration?: number;
   customHttpHandling?: boolean;
+  /** Used when API/body has no messages (e.g. inline form errors) */
+  fallbackMessage?: string;
   /**
    * Whether to throw the error after handling (default: false)
    */
