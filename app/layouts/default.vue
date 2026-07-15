@@ -61,9 +61,6 @@ const navItems = computed<NavigationMenuItem[]>(() => [
             variant="link"
             color="neutral"
             :highlight="false"
-            :ui="{
-              root: 'rtl:dir-rtl',
-            }"
           />
 
           <div

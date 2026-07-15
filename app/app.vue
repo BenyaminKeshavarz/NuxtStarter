@@ -1,31 +1,31 @@
 <script setup lang="ts">
 // #region --------- Imports ---------
+import * as locales from "@nuxt/ui/locale";
 import AppLoadingOverlay from "~/components/layout/AppLoadingOverlay.vue";
 import AppNavigateLoading from "~/components/layout/AppNavigateLoading.vue";
 // #endregion
 
 // #region --------- Utilities & Services ---------
-const { locale, locales } = useI18n();
+const { locale } = useI18n();
 // #endregion
 
 // #region --------- Computed ---------
-const currentLocale = computed(() => {
-  return locales.value.find((l) => l.code === locale.value) || locales.value[0];
-});
+const lang = computed(() => locales[locale.value].code);
+const dir = computed(() => locales[locale.value].dir);
 // #endregion
 
 useHead({
   htmlAttrs: {
-    lang: () => currentLocale.value?.language,
-    dir: () => currentLocale.value?.dir ?? "ltr",
-    class: () => (currentLocale.value?.dir === "ltr" ? "font-en" : "font-fa"),
+    lang,
+    dir,
+    class: computed(() => (dir.value === "rtl" ? "font-fa" : "font-en")),
   },
 });
 </script>
 
 <template>
   <!-- Main App Wrapper -->
-  <UApp>
+  <UApp :locale="locales[locale]">
     <NuxtLoadingIndicator :height="5" :throttle="200" />
     <AppNavigateLoading />
 

@@ -43,15 +43,19 @@ export default defineNuxtConfig({
     },
   },
 
+  /* ### Site Config (@nuxtjs/seo) */
+  site: {
+    name: "NuxtStarter", // TODO: confirm final brand/site name
+    description: "", // TODO: set default site description for SEO
+    // url: "https://example.com", // TODO: set production URL
+  },
+
   /* ### App SEO and Head Configuration */
   app: {
     head: {
-      title: "Nuxt Starter Template", // TODO: Change title.
-      htmlAttrs: { lang: "en-US", dir: "ltr" },
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "description", content: "" }, // TODO: Change description for SEO.
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
@@ -103,7 +107,7 @@ export default defineNuxtConfig({
         },
       },
       {
-        code: "fa",
+        code: "fa_ir",
         name: "Persian",
         localName: "فارسی",
         language: "fa-IR",

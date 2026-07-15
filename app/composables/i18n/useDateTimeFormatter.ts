@@ -16,7 +16,10 @@ type DateTimeType = string | number | Date | undefined | null;
  * It is independent of any UI library and uses @internationalized/date directly.
  */
 export function useDateTimeFormatter() {
-  const { locale } = useI18n();
+  const { localeProperties } = useI18n();
+  const intlLocale = computed(
+    () => localeProperties.value.language || localeProperties.value.code,
+  );
 
   // Parses various date formats into a standard DateValue object.
   function _parseDate(date: DateTimeType): DateValue | null {
@@ -66,7 +69,7 @@ export function useDateTimeFormatter() {
       day: "numeric",
     };
 
-    const formatter = new DateFormatter(locale.value, {
+    const formatter = new DateFormatter(intlLocale.value, {
       ...defaultOptions,
       ...options,
     });
@@ -93,7 +96,7 @@ export function useDateTimeFormatter() {
       minute: "numeric",
     };
 
-    const formatter = new DateFormatter(locale.value, {
+    const formatter = new DateFormatter(intlLocale.value, {
       ...defaultOptions,
       ...options,
     });
@@ -123,7 +126,7 @@ export function useDateTimeFormatter() {
       minute: "numeric",
     };
 
-    const formatter = new DateFormatter(locale.value, {
+    const formatter = new DateFormatter(intlLocale.value, {
       ...defaultOptions,
       ...options,
     });
