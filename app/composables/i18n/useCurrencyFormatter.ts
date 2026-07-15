@@ -1,3 +1,5 @@
+import type { LocaleConfig } from "~/types/utils/i18n";
+
 type AmountType = number | string;
 
 /**
@@ -5,8 +7,10 @@ type AmountType = number | string;
  */
 export function useCurrencyFormatter() {
   const { localeProperties } = useI18n();
-
-  const locale = computed(() => localeProperties.value as any);
+  const locale = computed(() => localeProperties.value as LocaleConfig);
+  const langCode = computed(
+    () => locale.value.language || locale.value.code,
+  );
 
   /**
    * Validates if the provided amount is a valid number
@@ -30,13 +34,9 @@ export function useCurrencyFormatter() {
         return "---";
       }
 
-      const currencyCode = locale.value.currency.code;
-
-      const langCode = locale.value.language || locale.value.code;
-
-      const formatter = new Intl.NumberFormat(langCode, {
+      const formatter = new Intl.NumberFormat(langCode.value, {
         style: "currency",
-        currency: currencyCode,
+        currency: locale.value.currency.code,
       });
 
       return formatter.format(Number(amount));
@@ -67,9 +67,7 @@ export function useCurrencyFormatter() {
 
       const { symbol } = locale.value.currency;
 
-      const langCode = locale.value.language || locale.value.code;
-
-      const formatter = new Intl.NumberFormat(langCode, {
+      const formatter = new Intl.NumberFormat(langCode.value, {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       });

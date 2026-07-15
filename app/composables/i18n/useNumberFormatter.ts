@@ -5,8 +5,9 @@
 export function useNumberFormatter() {
   const { handleError } = useErrorHandler();
   const { localeProperties } = useI18n();
-
-  const locale = computed(() => localeProperties.value as any);
+  const langCode = computed(
+    () => localeProperties.value.language || localeProperties.value.code,
+  );
 
   /**
    * Formats a number according to the specified locale
@@ -25,10 +26,8 @@ export function useNumberFormatter() {
         return "-";
       }
 
-      const langCode = locale.value.language || locale.value.code;
-
       // Return the formatted number using the current locale
-      return new Intl.NumberFormat(langCode, options).format(num);
+      return new Intl.NumberFormat(langCode.value, options).format(num);
     } catch (error) {
       console.error("Error formatting number:", error);
       return "-";
@@ -95,9 +94,7 @@ export function useNumberFormatter() {
         return "-";
       }
 
-      const langCode = locale.value.language || locale.value.code;
-
-      return new Intl.NumberFormat(langCode, {
+      return new Intl.NumberFormat(langCode.value, {
         style: "percent",
         minimumFractionDigits: fractionDigits,
         maximumFractionDigits: fractionDigits,

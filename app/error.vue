@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
-import * as locales from "@nuxt/ui/locale";
 
 const props = defineProps<{
   error: NuxtError;
 }>();
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
+const { uiLocale, lang, dir } = useUiLocale();
 
 const statusCode = computed(() => props.error.statusCode ?? 500);
-
-const lang = computed(() => locales[locale.value].code);
-const dir = computed(() => locales[locale.value].dir);
 
 const errorMeta = computed(() => {
   if (statusCode.value === 404) {
@@ -55,7 +52,7 @@ function handleHome() {
 </script>
 
 <template>
-  <UApp :locale="locales[locale]">
+  <UApp :locale="uiLocale">
     <div class="flex min-h-screen items-center justify-center p-6">
       <div class="max-w-md text-center">
         <UIcon

@@ -1,17 +1,11 @@
 <script setup lang="ts">
 // #region --------- Imports ---------
-import * as locales from "@nuxt/ui/locale";
 import AppLoadingOverlay from "~/components/layout/AppLoadingOverlay.vue";
 import AppNavigateLoading from "~/components/layout/AppNavigateLoading.vue";
 // #endregion
 
 // #region --------- Utilities & Services ---------
-const { locale } = useI18n();
-// #endregion
-
-// #region --------- Computed ---------
-const lang = computed(() => locales[locale.value].code);
-const dir = computed(() => locales[locale.value].dir);
+const { uiLocale, lang, dir } = useUiLocale();
 // #endregion
 
 useHead({
@@ -25,7 +19,7 @@ useHead({
 
 <template>
   <!-- Main App Wrapper -->
-  <UApp :locale="locales[locale]">
+  <UApp :locale="uiLocale">
     <NuxtLoadingIndicator :height="5" :throttle="200" />
     <AppNavigateLoading />
 

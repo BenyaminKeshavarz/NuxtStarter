@@ -17,7 +17,7 @@ type DateTimeType = string | number | Date | undefined | null;
  */
 export function useDateTimeFormatter() {
   const { localeProperties } = useI18n();
-  const intlLocale = computed(
+  const langCode = computed(
     () => localeProperties.value.language || localeProperties.value.code,
   );
 
@@ -69,7 +69,7 @@ export function useDateTimeFormatter() {
       day: "numeric",
     };
 
-    const formatter = new DateFormatter(intlLocale.value, {
+    const formatter = new DateFormatter(langCode.value, {
       ...defaultOptions,
       ...options,
     });
@@ -96,7 +96,7 @@ export function useDateTimeFormatter() {
       minute: "numeric",
     };
 
-    const formatter = new DateFormatter(intlLocale.value, {
+    const formatter = new DateFormatter(langCode.value, {
       ...defaultOptions,
       ...options,
     });
@@ -126,7 +126,7 @@ export function useDateTimeFormatter() {
       minute: "numeric",
     };
 
-    const formatter = new DateFormatter(intlLocale.value, {
+    const formatter = new DateFormatter(langCode.value, {
       ...defaultOptions,
       ...options,
     });

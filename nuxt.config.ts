@@ -107,7 +107,7 @@ export default defineNuxtConfig({
         },
       },
       {
-        code: "fa_ir",
+        code: "fa",
         name: "Persian",
         localName: "فارسی",
         language: "fa-IR",
