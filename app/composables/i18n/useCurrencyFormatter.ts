@@ -1,16 +1,22 @@
-import type { LocaleConfig } from "~/types/utils/i18n";
-
 type AmountType = number | string;
+
+type LocaleWithCurrency = {
+  code: string;
+  language?: string;
+  currency: {
+    code: string;
+    symbol: string;
+    position: "before" | "after";
+  };
+};
 
 /**
  * Composable for currency formatting across different locales
  */
 export function useCurrencyFormatter() {
   const { localeProperties } = useI18n();
-  const locale = computed(() => localeProperties.value as LocaleConfig);
-  const langCode = computed(
-    () => locale.value.language || locale.value.code,
-  );
+  const locale = computed(() => localeProperties.value as LocaleWithCurrency);
+  const langCode = computed(() => locale.value.language || locale.value.code);
 
   /**
    * Validates if the provided amount is a valid number
