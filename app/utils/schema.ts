@@ -1,8 +1,25 @@
 import { z } from "zod";
 
 // #region --------- Helpers ---------
-export const isPhoneNumber = (value: string) =>
-  value.startsWith("09") || !isNaN(Number(value));
+
+/** Strip separators; map +98 / 0098 / 98… → 09… */
+export function normalizeIranMobile(raw: string): string {
+  let v = raw.trim().replace(/[\s\-()]/g, "");
+  if (v.startsWith("+98")) v = `0${v.slice(3)}`;
+  else if (v.startsWith("0098")) v = `0${v.slice(4)}`;
+  else if (/^98\d{10}$/.test(v)) v = `0${v.slice(2)}`;
+  return v;
+}
+
+export const isPhoneNumber = (value: string) => {
+  const v = value.trim().replace(/[\s\-()]/g, "");
+  return (
+    v.startsWith("09") ||
+    v.startsWith("+98") ||
+    v.startsWith("0098") ||
+    /^98\d{10}$/.test(v)
+  );
+};
 
 const toTitleCase = (value: string): string => {
   return value
@@ -17,18 +34,10 @@ const toTitleCase = (value: string): string => {
  * If value is "" or undefined, it passes as optional.
  */
 export const asOptionalField = <T extends z.ZodTypeAny>(schema: T) => {
-  return (
-    z
-      // .union([
-      //   schema,
-      //   z.literal("").transform(() => undefined), // Handle empty string from form inputs
-      // ])
-      // .optional(); // Handle actual undefined
-      .preprocess(
-        (val: unknown) =>
-          typeof val === "string" && val.trim() === "" ? undefined : val,
-        schema.optional(),
-      )
+  return z.preprocess(
+    (val: unknown) =>
+      typeof val === "string" && val.trim() === "" ? undefined : val,
+    schema.optional(),
   );
 };
 
@@ -36,26 +45,27 @@ export const asOptionalField = <T extends z.ZodTypeAny>(schema: T) => {
  * Converts null values to empty string before applying the schema.
  * Useful for form fields that can be null but need to be validated as strings.
  */
-export const nullToEmptyString = <T extends z.ZodTypeAny>(schema: T) => {
+export const nullToEmptyString = <T extends z.ZodType<string>>(schema: T) => {
   return z.preprocess(
-    (val) => (val === null || val === undefined ? "" : val),
+    (val: unknown) => (val === null || val === undefined ? "" : val),
     schema,
-  );
+  ) as unknown as T;
 };
 // #endregion
 
 // #region --------- Schemas ---------
+/** Accepts 09… / +98… / 0098…; output canonical 09XXXXXXXXX. */
 export const phoneSchema = z
   .string()
   .trim()
-  .transform((value) => value.replace(/\s+/g, ""))
+  .transform((value) => normalizeIranMobile(value))
   .pipe(
     z
       .string()
       .nonempty("این فیلد ضروری است")
       .regex(
         /^09\d{9}$/,
-        "شماره تلفن نامعتبر است. باید با 09 شروع شود و 11 رقم باشد",
+        "شماره موبایل نامعتبر است (مثال: 09121234567 یا +989121234567)",
       ),
   );
 
@@ -86,9 +96,12 @@ export const birthDateSchema = z
   .refine((val) => new Date(val) < new Date(), {
     message: "تاریخ تولد نمی‌تواند در آینده باشد.",
   })
-  .refine((val) => new Date(val).getFullYear() > new Date().getFullYear() - 100, {
-    message: "تاریخ تولد وارد شده معتبر به نظر نمی‌رسد.",
-  });
+  .refine(
+    (val) => new Date(val).getFullYear() > new Date().getFullYear() - 100,
+    {
+      message: "تاریخ تولد وارد شده معتبر به نظر نمی‌رسد.",
+    },
+  );
 
 export const genderSchema = z.enum(["Male", "Female"], {
   error: "جنسیت باید انتخاب شود",
@@ -145,9 +158,10 @@ export const usernameOrPhoneSchema = z
     const result = schema.safeParse(value);
 
     if (!result.success) {
-      ctx.addIssue(
-        result.error.issues[0]?.message ?? "ورودی نامعتبر است",
-      );
+      ctx.addIssue({
+        code: "custom",
+        message: result.error.issues[0]?.message ?? "ورودی نامعتبر است",
+      });
     }
   });
 
