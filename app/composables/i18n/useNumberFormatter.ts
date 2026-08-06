@@ -21,7 +21,7 @@ export function useNumberFormatter() {
     options: Intl.NumberFormatOptions = {},
   ): string {
     try {
-      if (!num || isNaN(num)) {
+      if ((num !== 0 && !num) || isNaN(num)) {
         handleError("Invalid number provided");
         return "-";
       }

@@ -25,7 +25,11 @@ const navItems = computed<NavigationMenuItem[]>(() => [
   <div>
     <UHeader :title="t('landing.hero.title')" :to="localePath('/')">
       <template #left>
-        <NuxtLink :to="localePath('/')" class="shrink-0">
+        <NuxtLink
+          :to="localePath('/')"
+          class="shrink-0"
+          :aria-label="t('landing.hero.title')"
+        >
           <AppLogo class="h-6 w-auto" />
         </NuxtLink>
       </template>
