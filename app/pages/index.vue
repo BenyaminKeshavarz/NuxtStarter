@@ -37,7 +37,7 @@ const featureIcons = [
   "i-lucide-zap",
   "i-lucide-blocks",
   "i-lucide-sun-moon",
-  "i-lucide-code-2",
+  "i-lucide-code-xml",
   "i-lucide-shield-check",
 ] as const;
 

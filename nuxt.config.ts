@@ -19,6 +19,11 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
     build: {
       sourcemap: false, // Disable sourcemaps to avoid Tailwind CSS v4 warnings
+      rolldownOptions: {
+        checks: {
+          pluginTimings: false,
+        },
+      },
     },
     optimizeDeps: {
       include: ["maska/vue"],
@@ -47,7 +52,10 @@ export default defineNuxtConfig({
   site: {
     name: "NuxtStarter", // TODO: confirm final brand/site name
     description: "", // TODO: set default site description for SEO
-    // url: "https://example.com", // TODO: set production URL
+    // Override with NUXT_PUBLIC_SITE_URL when you attach a custom domain
+    url:
+      process.env.NUXT_PUBLIC_SITE_URL ||
+      "https://nuxt-starter-theta.vercel.app",
   },
 
   /* ### App SEO and Head Configuration */
@@ -81,6 +89,12 @@ export default defineNuxtConfig({
     preference: "dark",
   },
   icon: {
+    // Bundle icons at build time; skip Iconify network fetch during SSR/prerender
+    provider: "none",
+    clientBundle: {
+      scan: true,
+      includeCustomCollections: true,
+    },
     customCollections: [{ prefix: "custom", dir: "./app/assets/icons" }],
   },
 
@@ -90,22 +104,9 @@ export default defineNuxtConfig({
   /* ### i18n Configuration */
   i18n: {
     langDir: "locales",
-    defaultLocale: "en",
-    defaultDirection: "ltr",
+    defaultLocale: "fa",
+    defaultDirection: "rtl",
     locales: [
-      {
-        code: "en",
-        name: "English",
-        localName: "English",
-        language: "en-US",
-        file: "en.json",
-        dir: "ltr",
-        currency: {
-          code: "USD",
-          symbol: "$",
-          position: "before",
-        },
-      },
       {
         code: "fa",
         name: "Persian",
@@ -117,6 +118,19 @@ export default defineNuxtConfig({
           code: "IRR",
           symbol: "تومان",
           position: "after",
+        },
+      },
+      {
+        code: "en",
+        name: "English",
+        localName: "English",
+        language: "en-US",
+        file: "en.json",
+        dir: "ltr",
+        currency: {
+          code: "USD",
+          symbol: "$",
+          position: "before",
         },
       },
     ],
@@ -132,6 +146,11 @@ export default defineNuxtConfig({
 
   /* ### OG Image (@nuxtjs/seo) — static prerender only; no runtime /_og endpoint */
   ogImage: {
+    zeroRuntime: true,
+  },
+
+  /* ### Sitemap (@nuxtjs/seo) — static routes only */
+  sitemap: {
     zeroRuntime: true,
   },
 
