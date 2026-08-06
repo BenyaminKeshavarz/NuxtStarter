@@ -8,6 +8,67 @@
       "description": "Please wait while the app loads."
     }
   },
+  "errors": {
+    "default": {
+      "title": "Something went wrong",
+      "message": "An unexpected error occurred. Please try again."
+    },
+    "noError": "No error provided",
+    "page": {
+      "retry": "Try again",
+      "back": "Go back"
+    },
+    "http": {
+      "400": {
+        "title": "Bad request",
+        "message": "The request is invalid. Please check your input and try again."
+      },
+      "401": {
+        "title": "Sign in required",
+        "message": "You need to sign in to access this page."
+      },
+      "403": {
+        "title": "Access denied",
+        "message": "You don't have permission to view this or perform this action."
+      },
+      "404": {
+        "title": "Page not found",
+        "message": "The page you're looking for doesn't exist or has been moved."
+      },
+      "408": {
+        "title": "Request timed out",
+        "message": "No response in time. Please try again."
+      },
+      "409": {
+        "title": "Conflict",
+        "message": "This action conflicts with the current data state."
+      },
+      "422": {
+        "title": "Unprocessable data",
+        "message": "The submitted data is incomplete or invalid."
+      },
+      "429": {
+        "title": "Too many requests",
+        "message": "Please wait a moment and try again."
+      },
+      "500": {
+        "title": "Server error",
+        "message": "Something went wrong on our end. Please try again."
+      },
+      "502": {
+        "title": "Bad gateway",
+        "message": "Upstream server returned an invalid response. Try again shortly."
+      },
+      "503": {
+        "title": "Service unavailable",
+        "message": "The service is temporarily unavailable. Please try again later."
+      },
+      "504": {
+        "title": "Gateway timeout",
+        "message": "Upstream server did not respond in time. Please try again."
+      }
+    }
+  },
   "landing": {
     "meta": {
       "title": "NuxtStarter — Personal Nuxt Starter Template",

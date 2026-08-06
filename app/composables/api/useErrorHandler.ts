@@ -2,94 +2,35 @@ import type {
   StructuredError,
   ErrorHandlerOptions,
   ParsedErrorResult,
-  HttpErrorConfig,
 } from "~/types/api/errorHandler";
 
 // #region Constants
 
-const DEFAULT_ERROR: StructuredError = {
-  title: "Error",
-  message: "An unexpected error occurred.",
-  name: "UnknownError",
-  stack: null,
-  cause: null,
-};
-
-const HTTP_ERRORS: Record<number, HttpErrorConfig> = {
-  400: {
-    status: 400,
-    title: "Bad Request",
-    message: "Please check your input and try again.",
-    type: "error",
-  },
-  401: {
-    status: 401,
-    title: "Unauthorized",
-    message: "Please log in to continue.",
-    type: "error",
-  },
-  403: {
-    status: 403,
-    title: "Access Denied",
-    message: "You don't have permission to perform this action.",
-    type: "error",
-  },
-  404: {
-    status: 404,
-    title: "Not Found",
-    message: "The requested resource was not found.",
-    type: "error",
-  },
-  409: {
-    status: 409,
-    title: "Conflict",
-    message: "This action conflicts with the current state.",
-    type: "warning",
-  },
-  422: {
-    status: 422,
-    title: "Validation Error",
-    message: "Please check your input and try again.",
-    type: "error",
-  },
-  429: {
-    status: 429,
-    title: "Too Many Requests",
-    message: "Please wait a moment and try again.",
-    type: "warning",
-  },
-  500: {
-    status: 500,
-    title: "Server Error",
-    message: "Something went wrong on our end. Please try again later.",
-    type: "error",
-  },
-  502: {
-    status: 502,
-    title: "Bad Gateway",
-    message: "Service temporarily unavailable. Please try again later.",
-    type: "error",
-  },
-  503: {
-    status: 503,
-    title: "Service Unavailable",
-    message: "Service temporarily unavailable. Please try again later.",
-    type: "error",
-  },
-  504: {
-    status: 504,
-    title: "Gateway Timeout",
-    message: "Request timed out. Please try again later.",
-    type: "error",
-  },
-};
+/** HTTP statuses that should toast as warning instead of error */
+const WARNING_STATUSES = new Set([409, 429]);
 
 const TOAST_ICONS: Record<string, string> = {
   error: "i-lucide-circle-x",
   warning: "i-lucide-triangle-alert",
-  info: "i-lucide-circle-info",
+  info: "i-lucide-info",
   success: "i-lucide-circle-check",
 };
+
+// #endregion
+
+// #region i18n
+
+/** Shared title/message for a status code (`errors.http.*` → `errors.default`). */
+export function resolveHttpErrorCopy(status: number) {
+  const { t, te } = useI18n();
+  const titleKey = `errors.http.${status}.title`;
+  const messageKey = `errors.http.${status}.message`;
+
+  return {
+    title: te(titleKey) ? t(titleKey) : t("errors.default.title"),
+    message: te(messageKey) ? t(messageKey) : t("errors.default.message"),
+  };
+}
 
 // #endregion
 
@@ -132,16 +73,32 @@ function parseError(
   error: unknown,
   options: Partial<ErrorHandlerOptions> = {},
 ): ParsedErrorResult {
+  const { t } = useI18n();
+  const fallbackCopy = resolveHttpErrorCopy(0);
+
   if (!error) {
-    const structuredError = { ...DEFAULT_ERROR, message: "No error provided" };
+    const structuredError: StructuredError = {
+      title: fallbackCopy.title,
+      message: t("errors.noError"),
+      name: "UnknownError",
+      stack: null,
+      cause: null,
+    };
     return {
       structuredError,
       toastTitle: structuredError.title,
       toastMessages: [structuredError.message],
     };
   }
+
   if (typeof error === "string") {
-    const structuredError = { ...DEFAULT_ERROR, message: error };
+    const structuredError: StructuredError = {
+      title: fallbackCopy.title,
+      message: error,
+      name: "UnknownError",
+      stack: null,
+      cause: null,
+    };
     return {
       structuredError,
       toastTitle: structuredError.title,
@@ -151,22 +108,19 @@ function parseError(
 
   const errorObj = error as any;
   const status = getHttpStatus(errorObj);
-  const httpConfig = HTTP_ERRORS[status];
+  const copy = status ? resolveHttpErrorCopy(status) : fallbackCopy;
   const responseData = extractResponseData(errorObj);
   const apiMessages = extractMessages(responseData);
   const fallback =
-    options.fallbackMessage ??
-    errorObj?.message ??
-    httpConfig?.message ??
-    DEFAULT_ERROR.message;
+    options.fallbackMessage ?? errorObj?.message ?? copy.message;
   const messages = apiMessages.length > 0 ? apiMessages : [fallback];
 
   const structuredError: StructuredError = {
-    title: httpConfig?.title ?? DEFAULT_ERROR.title,
-    message: messages[0],
+    title: copy.title,
+    message: messages[0]!,
     messages,
     name:
-      errorObj?.name ?? (status ? `HttpError${status}` : DEFAULT_ERROR.name),
+      errorObj?.name ?? (status ? `HttpError${status}` : "UnknownError"),
     stack: errorObj?.stack ?? null,
     cause: errorObj?.cause ?? null,
     details: status
@@ -174,15 +128,12 @@ function parseError(
       : { messages },
   };
 
-  const toastTitle = options.toastTitle ?? structuredError.title;
-  const toastMessages = options.toastMessage
-    ? [options.toastMessage]
-    : messages;
-
   return {
     structuredError,
-    toastTitle,
-    toastMessages,
+    toastTitle: options.toastTitle ?? structuredError.title,
+    toastMessages: options.toastMessage
+      ? [options.toastMessage]
+      : messages,
   };
 }
 
@@ -237,7 +188,6 @@ export function useErrorHandler() {
     options: Partial<ErrorHandlerOptions> = {},
   ): void {
     const mergedOptions = { logError: true, ...options };
-
     const { structuredError, toastTitle, toastMessages } = parseError(
       error,
       mergedOptions,
@@ -261,7 +211,6 @@ export function useErrorHandler() {
       }
     }
 
-    // 5XX → error page
     if (status >= 500) {
       showError({
         statusCode: status,
@@ -273,7 +222,6 @@ export function useErrorHandler() {
       return;
     }
 
-    // 404 → optional action
     if (status === 404) {
       const action = mergedOptions.notFoundAction ?? "silent";
       if (action === "redirect" && mergedOptions.redirectTo)
@@ -290,20 +238,17 @@ export function useErrorHandler() {
       return;
     }
 
-    // One toast per error message (multiple API errors → multiple toasts)
     if (mergedOptions.showToast) {
       const toastType =
-        HTTP_ERRORS[status]?.type ?? mergedOptions.toastType ?? "error";
+        mergedOptions.toastType ??
+        (WARNING_STATUSES.has(status) ? "warning" : "error");
       const duration = mergedOptions.toastDuration ?? 5000;
       toastMessages.forEach((msg) =>
         showToast(toastTitle, msg, toastType, duration),
       );
     }
 
-    const redirect =
-      mergedOptions.redirectTo ?? HTTP_ERRORS[status]?.redirectTo;
-    if (redirect) navigateTo(redirect);
-
+    if (mergedOptions.redirectTo) navigateTo(mergedOptions.redirectTo);
     if (mergedOptions.throwError) throw error;
   }
 
